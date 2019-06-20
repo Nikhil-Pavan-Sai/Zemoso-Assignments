@@ -14,7 +14,7 @@ public class Overloading
 
     Overloading(int x, int y)
     {
-        System.out.println("This is number constructor " + x * y); 
+        System.out.println("This is number constructor " + x * y);
     }
 
     public static void main(String args[])
