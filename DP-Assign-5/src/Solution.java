@@ -20,10 +20,10 @@ public class Solution
         Subway subway = new Addons(new Sauce(new Salad(new Bread())));
 
 
-        System.out.println("Ingredients in the SubwayHelpers.Subway are: " + subway.getDescr());
+        System.out.println("Ingredients in the Subway are: " + subway.getDescr());
 
 
-        System.out.println("Cost for the SubwayHelpers.Subway is: " + subway.getCost());
+        System.out.println("Cost for the Subway is: " + subway.getCost());
     }
 
 }
