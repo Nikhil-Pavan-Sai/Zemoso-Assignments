@@ -6,8 +6,6 @@ all three types of exceptions. Add a finally clause and verify that your finally
 clause is executed, even if a NullPointerException is thrown.
 */
 
-
-
 class Excep extends Exception{
 
   private String string;
