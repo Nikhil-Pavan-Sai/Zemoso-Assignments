@@ -1,0 +1,28 @@
+1 & 2. 
+
+CREATE TABLE Customer (CustNo integer(10) PRIMARY KEY, CustFirstName varchar(20), CustLastName varchar(20), CustCity varchar(10), CustState varchar(10), CustZip integer(10), CustBal integer(10))
+
+
+CREATE TABLE Employee (EmpNo varchar(10) PRIMARY KEY, SuperNo, EmpFirstName varchar(20), EmpLastName varchar(20), EmpPhone integer(10), EmpEmail varchar(20), EmpDeptName varchar(10), EmpCommRate varchar(20)) FOREIGN KEY (SuperNo) REFERENCES Employee
+
+
+CREATE TABLE Order (OrdNo varchar(10) PRIMARY KEY, OrdDate date, OrdName varchar(20), OrdCity varchar(10), OrdState varchar(10), OrdZip varchar(10)) FOREIGN KEY (EmpNo) REFERENCES Employee
+	     FOREIGN KEY (CustNo) REFERENCES Customer
+	     CustNo NOT NULL
+
+
+CREATE TABLE Product (ProdNo varchar(10) PRIMARY KEY, ProdName varchar(20), ProdQOH varchar(20), ProdPrice integer(10), ProdNextShipDate date) 
+
+
+CREATE TABLE Contains (OrdNo varchar(10), ProdNo varchar(10), Qty)
+FOREIGN KEY (OrdNo) REFERENCES Order
+FOREIGN KEY (ProdNo) REFERENCES Product
+
+
+3.
+CREATE TABLE Building (BldgID varchar(10) PRIMARY KEY, BldgName varchar(20), BldgLocation varchar(10))
+
+
+CREATE TABLE Room (RoomID varchar(10) PRIMARY KEY, RoomCapacity integer(5)) 
+FOREIGN KEY (BldgID) REFERENCES Building
+
