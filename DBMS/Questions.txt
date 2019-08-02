@@ -1,0 +1,72 @@
+1. IRCTC
+
+
+Design a database schema for railway ticket booking using the E-R model and design tables accordingly using the relationship model. The necessary information is given below :
+
+Entities : Train, Ticket, Customer
+
+Ticket can be reserved or unreserved.
+
+Each reserved ticket must correspond to a train and a customer.
+
+Each unreserved ticket must correspond to a customer.
+
+A customer cannot be in two trains at the same time.
+
+Assume columns accordingly and mention primary keys, weak and strong entities.
+
+
+2. Hotel Booking
+
+
+Design a database schema for a hotel booking agency using the E-R model and design tables accordingly using the relationship model. The necessary information is given below :
+
+Entities : Hotel, Customer
+
+Customer can be first time user or loyal customer.
+
+Customer can book from only only hotel at a time. A hotel can have many customers.
+
+Assume columns accordingly and mention primary keys, weak and strong entities.
+
+
+3. IMDB
+
+
+Design a database schema for a movie and tv series database using the E-R model and design tables accordingly using the relationship model. The necessary information is given below :
+
+Entities : Movie, Actors, TV series
+
+A TV series or a movie must have an actor. An actor can act in both.
+
+Assume columns accordingly and mention primary keys, weak and strong entities.
+
+
+4. E-Commerce
+
+
+Design a database schema for an e-commerce app using the E-R model and design tables accordingly using the relationship model. The necessary information is given below :
+
+Entities : Supplier, Customer, Items, Order
+
+Every item should correspond to a supplier. One supplier can have more than one items.
+
+A customer can have one order at the same time. One order can have multiple items from multiple brands.
+
+Assume columns accordingly and mention primary keys, weak and strong entities.
+
+
+5. Paytm
+
+
+Design a database schema for a banking app using the E-R model and design tables accordingly using the relationship model. The necessary information is given below :
+
+Entities : Accounts, Customer, Branches
+
+Each customer must have an account. Joint accounts are allowed.
+
+A customer can have multiple accounts in different branch, but not in same branch.
+
+A branch can have many accounts.
+
+Assume columns accordingly and mention primary keys, weak and strong entities.
