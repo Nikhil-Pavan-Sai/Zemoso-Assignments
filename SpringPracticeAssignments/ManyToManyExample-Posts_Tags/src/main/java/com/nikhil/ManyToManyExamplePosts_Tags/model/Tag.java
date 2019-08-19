@@ -17,15 +17,6 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    public Set<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
-    }
-
     @NotNull
     @Size(max = 100)
     @NaturalId
@@ -39,6 +30,14 @@ public class Tag {
             },
             mappedBy = "tags")
     private Set<Post> posts = new HashSet<>();
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
 
     public Tag() {}
 
