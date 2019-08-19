@@ -1,0 +1,55 @@
+1. You are probably using the internet to do some of your personal banking. There is a page that shows your accounts and their balances, often called something like "Account Summary" or "Account Overview." You must click on an account to begin managing it. Which type of web page is this?
+
+Ans: Dynamic Web Page
+
+2. Another web page allows interacting with a spreadsheet in a browser. You can enter in values, sum them up, perform operations on them, format them, etc. What type of web page is this?
+
+Ans: Web App
+
+3. Consider the two statements. Choose the one correct option.
+	1. JSON is a markup language
+	2. JSON can easily be converted into a Javascript object
+
+Ans: Only the second statement is correct.
+
+4. Which of these is NOT a basic standard of the World Wide Web?
+
+Ans: URL
+
+5. There is an HTTP method that allows you to send, create or update a resource, but allows the server to decide its location and identity. Which HTTP method is this?
+
+Ans: PUT
+
+6. Which of these is often used to add dynamic content to a web page?
+
+Ans: JavaScript
+
+7. What are the three high-level components involved in a remote procedural call?
+
+Ans: Client, Server, Interface Definition Language (IDL)
+
+8. The process of establishing a connection between the client stub and server stub is called…
+
+Ans: Binding
+
+9. What are the advantages of Common Object Request Broker Architecture (CORBA)? Choose the two correct answers.
+
+Ans: 	1. It allows for object-oriented paradigms in distributed 		computing.
+
+	2. Objects are essentially independent of their physical or 		virtual location.
+
+10. Which of these are desirable characteristics of a web service? Select the three correct answers.
+
+Ans: Modular, Platform-Independent, Composable.
+
+11. Which of these responsibilities does the client stub have in a middleware-based architecture that uses RPC? Choose the three correct answers.
+
+Ans: 	1. Establishing a connection with the server
+
+	2. Invoking the remote procedure call over the network
+
+	3. Invoking the server application directly
+
+12. What is the main difference between a web service and a web application?
+
+Ans: Web applications are presented through a browser.
