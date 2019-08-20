@@ -1,0 +1,57 @@
+1. REST uses several HTTP methods to communicate. Which HTTP method should not make a change to data on the server?
+
+Ans: GET
+
+2. Which of these are constraints of REST architectures? Choose the three correct answers.
+
+Ans: 	1. Uniform interface for communication
+	2. Layered and client-server based
+	3. Clients can cache responses
+
+3. According to REST best practices, where should you specify what format the input and output messages are in?
+
+Ans: HTTP headers
+
+4. Which of these are acceptable REST URIs according to best practices? Choose the two correct answers.
+
+Ans: 	1. /students/
+	2. /students/3/
+
+5. Which of these is NOT used in developing RESTful web services?
+
+Ans: SOAP
+
+6. By convention, which HTML method is usually used to create a new resource?
+
+Ans: POST
+
+7. What is the recommended way to not break functionality if your RESTful API is being used by many users?
+
+Ans: Version your API
+
+8. Which of these best describes microservices?
+
+Ans: A variation of SOA applied on an application scale.
+
+9. Consider the two statements. Choose the one correct option.
+	1. Microservices must be in the same language and framework
+	2. Microservices can be replicated for scaling
+
+Ans: Only 2nd statement is correct.
+
+10. Question 10
+Which are the advantages of microservices? Choose the two correct answers.
+
+Ans: 	1. Testing is simple
+	2. Services can be scaled independently
+
+11. How can you pass parameters in a REST call? Select the two correct answers.
+
+Ans: 	1. In the HTTP header
+	2. In the URL
+
+12. Consider the following two statements about RESTful web services. Choose the one correct option
+	1. Requests can be sent in simple text
+	2. PUT is usually used to create new resource
+
+Ans: Only 1st statement is correct.
