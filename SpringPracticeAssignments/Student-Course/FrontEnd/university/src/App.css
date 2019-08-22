@@ -8,15 +8,18 @@
   pointer-events: none;
 }*/
 
+.button{
+    margin:20px;
+    padding:10px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  border:1px solid #000000;
-  height:300px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   font-size: 25px;
   color: white;
 }

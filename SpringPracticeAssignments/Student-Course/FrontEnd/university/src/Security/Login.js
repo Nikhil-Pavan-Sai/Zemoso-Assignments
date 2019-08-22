@@ -37,26 +37,30 @@ class Login extends React.Component {
 
           <Heading> <font color="#1DECEC"> Login </font></Heading>
 
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel><font color="#1849EA"> Email </font></ControlLabel><br/>
-            <FormControl
-              autoFocus
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
+          <div className="Text-Color">
+              <FormGroup controlId="email" bsSize="large">
+                <ControlLabel> Email </ControlLabel><br/>
+                <FormControl
+                  autoFocus
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+          </div>
 
           <br/>
 
+          <div className="Text-Color">
           <FormGroup controlId="password" bsSize="large">
-            <ControlLabel><font color="#1849EA"> Password </font></ControlLabel><br/>
+            <ControlLabel> Password </ControlLabel><br/>
             <FormControl
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
             />
           </FormGroup>
+          </div>
 
           <br/>
 
