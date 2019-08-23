@@ -1,43 +1,20 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import Register from './Register.js'
 import "./Login.css";
+
 
 const Heading = ({children}) => <h1>{children}</h1>
 
-class Login extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isRegistered:false,
       email: "",
       password: ""
     };
-    this.changeRegistered=this.changeRegistered.bind(this)
   }
-
-  changeRegistered()
-  {
-      this.setState({isRegistered:!this.state.isRegistered})
-  }
-
-
-  async validateForm(callback) {
-    if(this.state.email.includes(".com"))
-    {
-        const response=fetch("/user/validate", {method:"POST", headers:{'Accept':'application/json',
-        'Content-Type':'application/json'}, body:JSON.stringify(this.state)}).then(x => {if(x.status == 200) callback(); else alert("Invalid Credentials !")});
-
-    }
-    if(!this.state.email.includes(".com"))
-    {
-        alert("Please Enter a valid Email !");
-    }
-   }
-
-
-  handleChange = event => {
+ handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
@@ -47,16 +24,18 @@ class Login extends React.Component {
     event.preventDefault();
   }
 
-
+  async addUser(registerUser)
+  {
+        const response=fetch("/user/add", {method:"POST", headers:{'Accept':'application/json',
+                'Content-Type':'application/json'}, body:JSON.stringify(this.state)}).then(alert("Successfully Registered !")).then(registerUser());
+  }
 
   render() {
-  if(this.state.isRegistered)
-          return(<Register registerUser={this.changeRegistered}/>)
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
 
-          <Heading> <font color="#1DECEC"> Login </font></Heading>
+          <Heading> <font color="#1DECEC"> Register </font></Heading>
 
           <div className="Text-Color">
               <FormGroup controlId="email" bsSize="large">
@@ -88,23 +67,15 @@ class Login extends React.Component {
           <Button
             block
             bsSize="large"
-            onClick={() => {this.validateForm(this.props.callback)}}
+            onClick={() => {this.addUser(this.props.registerUser)}}
             type="submit"
           >
-            Login
+            Register
           </Button>
-
-          <br/>
-
-          <Button className="fontSize"
-          onClick={this.changeRegistered}
-          >
-          Register </Button>
-
         </form>
       </div>
     );
   }
 }
 
-export default Login;
+export default Register;

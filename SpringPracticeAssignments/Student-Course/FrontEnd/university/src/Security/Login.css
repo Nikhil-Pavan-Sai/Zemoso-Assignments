@@ -1,10 +1,14 @@
 @media all and (min-width: 480px) {
   .Login {
-    padding: 60px 0;
+    padding: 30px;
   }
 
   .Text-Color{
-    color: #1849EA;
+    color: #000000;
+  }
+
+  .fontSize{
+    font-size: 12px;
   }
 
   .Login form {
