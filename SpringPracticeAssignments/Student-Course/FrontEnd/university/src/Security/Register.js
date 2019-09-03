@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
-import "/home/user/Documents/Assignments/SpringPracticeAssignments/Student-Course/FrontEnd/university/src/App.css"
+
 
 const Heading = ({children}) => <h1>{children}</h1>
 
@@ -64,7 +64,7 @@ class Register extends React.Component {
 
           <br/>
 
-          <Button className="glass"
+          <Button
             block
             bsSize="large"
             onClick={() => {this.addUser(this.props.registerUser)}}

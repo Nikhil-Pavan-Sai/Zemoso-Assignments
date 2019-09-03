@@ -93,7 +93,7 @@ render(){
                 {
                     this.state.students.map(
                     student =>
-                    <div>  <button class="glass" onClick={() => {this.expandStudent(student.id)}}> {student.name}
+                    <div>  <button class="btn" onClick={() => {this.expandStudent(student.id)}}> {student.name}
 
                     </button>  </div>
                     )
@@ -131,7 +131,7 @@ render(){
                                 <h3> {student.name} </h3>
                                 <p> Branch: {student.branch} </p>
                                 <p> Standard: {student.standard} </p>
-                                <button className="glass" onClick={() => {this.changeRegisteredCourse(student.id)}}> Registered Courses  </button><br/>
+                                <button onClick={() => {this.changeRegisteredCourse(student.id)}}> Registered Courses  </button><br/>
                             </div>
                         </div>
                     )
@@ -163,7 +163,7 @@ render(){
           <div> <header className = "button" />
               <ControlLabel> University Of Starks </ControlLabel> <br/> <br/>
 
-              <Button className="glass"
+              <Button className="button"
                   block
                   bsSize="large"
                   onClick={() => {this.changeStudentsClicked()}}
@@ -171,12 +171,12 @@ render(){
                   Students
               </Button>
 
-              <Button className="glass"
+              <Button className="button"
                   block
                   bsSize="large"
                   onClick={() => {this.changeCourseClicked()}}
                   type="submit" >
-                  Courses
+                  Total Courses
               </Button>
               </div>
           </div>

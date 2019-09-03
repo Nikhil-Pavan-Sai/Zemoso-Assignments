@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import Register from './Register.js'
 import "./Login.css";
-import "/home/user/Documents/Assignments/SpringPracticeAssignments/Student-Course/FrontEnd/university/src/App.css"
 
 const Heading = ({children}) => <h1>{children}</h1>
 
@@ -86,7 +85,7 @@ class Login extends React.Component {
 
           <br/>
 
-          <Button className="glass"
+          <Button
             block
             bsSize="large"
             onClick={() => {this.validateForm(this.props.callback)}}
@@ -97,7 +96,7 @@ class Login extends React.Component {
 
           <br/>
 
-          <Button className="glass"
+          <Button className="fontSize"
           onClick={this.changeRegistered}
           >
           Register </Button>

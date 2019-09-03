@@ -11,31 +11,6 @@
   display: inline-block;
 }
 
-.glass{
-    width:200px;
-    height:60px;
-    line-height:60px;
-    text-align:center;
-    font-size:30px;
-    color:#FFFFFF;
-    text-shadow:1px 1px 1px rgba(0,0,0,0.3);
-    user-select:none;
-    border-radius:30px;
-    box-shadow:0 5px 10px #43265EAA;
-    background-image:linear-gradient(to bottom,#D600A4 50%,#3C002F);
-    position:relative;
-}
-
-.glass:before{
-    content:'';
-    display:absolute;
-    width:200px;
-    height:60px;
-    left:calc(50% - 85px);
-    border-radius:10px 10px 20px 20px;
-    background-image:linear-gradient(to bottom, #FFFFFFAA, #FFFFFF11);
-}
-
 /*.App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
