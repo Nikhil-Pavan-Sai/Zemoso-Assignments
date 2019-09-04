@@ -1,6 +1,7 @@
 body {
   height: 100%;
   width: 100%;
+  left: 0;
   background-repeat: no-repeat;
   background-size: 100%;
 }
@@ -24,6 +25,7 @@ body {
 ul {
   list-style-type: none;
   margin: 0;
+  left: 0;
   padding: 0;
   overflow: hidden;
   background-color: #333;
@@ -47,4 +49,16 @@ li a:hover:not(.active) {
 
 .active {
   background-color: #4caf50;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: block;
+  float: left;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: left;
 }
