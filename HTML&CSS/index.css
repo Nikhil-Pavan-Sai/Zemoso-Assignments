@@ -52,7 +52,7 @@ li a:hover:not(.active) {
 }
 
 .footer {
-  position: fixed;
+  position: inherit;
   left: 0;
   bottom: 0;
   display: block;
@@ -61,4 +61,17 @@ li a:hover:not(.active) {
   background-color: #333;
   color: white;
   text-align: left;
+}
+
+.clearfix {
+  zoom: 1;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+  clear: both;
+  visibility: hidden;
 }
