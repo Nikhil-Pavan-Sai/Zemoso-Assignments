@@ -31,6 +31,7 @@ public class CourseController
     @PostMapping("/students/{studentId}/courses")
     public Student addCourseToStudent(@PathVariable (value = "studentId") Long studentId, @Valid @RequestBody Course course)
     {
+        System.out.println(studentId + " " + course.getCourseName());
         Student student=studentRepo.findById(studentId).orElseThrow(() -> new ResourceNotFoundException("Courses not found !"));
         Set<Course> set = student.getCourses();
         set.add(course);

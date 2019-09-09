@@ -86,7 +86,7 @@ class Login extends React.Component {
 
           <br/>
 
-          <Button className="glass"
+          <Button
             block
             bsSize="large"
             onClick={() => {this.validateForm(this.props.callback)}}
@@ -97,7 +97,7 @@ class Login extends React.Component {
 
           <br/>
 
-          <Button className="glass"
+          <Button
           onClick={this.changeRegistered}
           >
           Register </Button>

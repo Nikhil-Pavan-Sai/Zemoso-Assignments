@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Login from './Security/Login.js';
+import AddCourse from './AddCourse.js';
 import Register from './Security/Register.js'
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
@@ -27,12 +28,15 @@ constructor(props)
     this.changeCourseClicked=this.changeCourseClicked.bind(this)
     this.expandStudent=this.expandStudent.bind(this)
     this.changeRegisteredCourse=this.changeRegisteredCourse.bind(this)
+    this.changeAddCourse=this.changeAddCourse.bind(this)
     this.state={
         isLoggedIn:false,
         isStudentsClicked:false,
         isCourseClicked:false,
         isExpandStudent:false,
         isRegisteredCourse:false,
+        isAddCourse:false,
+        currId:null,
         students:[],
         courses:[],
         student_courses:[],
@@ -71,6 +75,12 @@ async changeRegisteredCourse(id)
     this.setState({student_courses:st_course})
 }
 
+changeAddCourse(id)
+{
+    this.setState({isAddCourse:true,isRegisteredCourse:false, isExpandStudent:false, isCourseClicked:false, isStudentsClicked:false,currId:id})
+}
+
+
 onChange(e)
 {
     this.setState({
@@ -82,8 +92,13 @@ onChange(e)
 }
 
 render(){
+    console.log(this.state.isAddCourse)
    if(!this.state.isLoggedIn)
         return(<Login callback={this.changeLogin}/>)
+
+    if(this.state.isAddCourse)
+        return(<AddCourse id={this.state.currId} callback={() => {this.setState({isAddCourse:false})}}/>)
+
 
 
   if(this.state.isStudentsClicked){
@@ -93,9 +108,9 @@ render(){
                 {
                     this.state.students.map(
                     student =>
-                    <div>  <button class="glass" onClick={() => {this.expandStudent(student.id)}}> {student.name}
+                    <div key={student.id}>  <Button block bsSize="large" onClick={() => {this.expandStudent(student.id)}}> {student.name}
 
-                    </button>  </div>
+                    </Button>  </div>
                     )
                 }
                 </div>
@@ -126,12 +141,13 @@ render(){
                 <div>
                 {    this.state.students.map(
                         student =>
-                        <div>
+                        <div key={student.id}>
                             <div>
                                 <h3> {student.name} </h3>
                                 <p> Branch: {student.branch} </p>
                                 <p> Standard: {student.standard} </p>
-                                <button className="glass" onClick={() => {this.changeRegisteredCourse(student.id)}}> Registered Courses  </button><br/>
+                                <Button block bsSize="large"  onClick={() => {this.changeRegisteredCourse(student.id)}}> Registered Courses  </Button><br/>
+                                <Button block bsSize="large"  onClick={() => {this.changeAddCourse(student.id)}}> Add Courses  </Button><br/>
                             </div>
                         </div>
                     )
@@ -163,7 +179,7 @@ render(){
           <div> <header className = "button" />
               <ControlLabel> University Of Starks </ControlLabel> <br/> <br/>
 
-              <Button className="glass"
+              <Button
                   block
                   bsSize="large"
                   onClick={() => {this.changeStudentsClicked()}}
@@ -171,7 +187,7 @@ render(){
                   Students
               </Button>
 
-              <Button className="glass"
+              <Button
                   block
                   bsSize="large"
                   onClick={() => {this.changeCourseClicked()}}
@@ -184,5 +200,4 @@ render(){
 
 }
 }
-
 export default App;
