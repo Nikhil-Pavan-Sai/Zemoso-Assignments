@@ -74,6 +74,7 @@ class AddCourse extends React.Component {
                 }
             </select><br/><br/>
             <button onClick={this.handleSubmit}> Add </button>
+            <br/><br/><button onClick={() => {}}>Home</button>
         </form>
       </div>
     );

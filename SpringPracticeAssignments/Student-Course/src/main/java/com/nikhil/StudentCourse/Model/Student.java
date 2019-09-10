@@ -1,5 +1,7 @@
 package com.nikhil.StudentCourse.Model;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -14,6 +16,7 @@ public class Student
     private Long id;
 
     @NotNull
+    @NaturalId
     private String name;
 
     @NotNull
