@@ -28,6 +28,11 @@ class Register extends React.Component {
   {
         const response=fetch("/user/add", {method:"POST", headers:{'Accept':'application/json',
                 'Content-Type':'application/json'}, body:JSON.stringify(this.state)}).then(alert("Successfully Registered !")).then(registerUser());
+
+        if(!this.state.email.includes(".com"))
+        {
+             alert("Please Enter a valid Email !");
+        }
   }
 
   render() {
