@@ -1,13 +1,46 @@
 @media all and (min-width: 480px) {
   .Login {
     padding: 30px;
+    text-align: center;
   }
 
-  .Text-Color{
+  .root {
+    flex-grow: 1;
+  }
+
+  .menubutton {
+    margin-right: 2;
+  }
+
+  .title {
+    flex-grow: 1;
+  }
+
+  .mask {
+    padding: 30px;
+    margin: 0 auto;
+    max-width: 320px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.5;
+
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='svgMask'><feGaussianBlur stdDeviation='10' /></filter></svg>#svgMask");
+  }
+
+  .Text-Color {
     color: #000000;
   }
 
-  .fontSize{
+  .fontSize {
     font-size: 12px;
   }
 
@@ -15,4 +48,8 @@
     margin: 0 auto;
     max-width: 320px;
   }
+}
+
+a {
+  font-size: 12px;
 }

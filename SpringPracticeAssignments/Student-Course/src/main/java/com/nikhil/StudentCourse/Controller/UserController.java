@@ -18,12 +18,12 @@ public class UserController
     UserRepo userRepo;
 
     @PostMapping("/user/validate")
-    public ResponseEntity<User> validate(@Valid @RequestBody User user) throws Exception
+    public ResponseEntity<Credentials> validate(@Valid @RequestBody Credentials credentials) throws Exception
     {
-        User u = userRepo.findByEmail(user.getEmail()).orElseThrow(ResourceNotFoundException::new);
-        if(u.getPassword().equals(user.getPassword()))
+        User u = userRepo.findByEmail(credentials.getEmail()).orElseThrow(ResourceNotFoundException::new);
+        if(u.getPassword().equals(credentials.getPassword()))
         {
-            return ResponseEntity.ok(user);
+            return ResponseEntity.ok(credentials);
         }
         else
             throw new ResourceNotFoundException();
@@ -53,6 +53,8 @@ public class UserController
         return userRepo.findById(userId).map(user1 -> {
             user1.setEmail(user.getEmail());
             user1.setPassword(user.getPassword());
+            user1.setFirstName(user.getFirstName());
+            user1.setLastName(user.getLastName());
             return userRepo.save(user1);
         }).orElseThrow(() -> new ResourceNotFoundException("Student: " + userId + " not found !"));
     }

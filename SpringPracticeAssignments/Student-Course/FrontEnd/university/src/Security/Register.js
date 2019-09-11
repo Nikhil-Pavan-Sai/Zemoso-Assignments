@@ -1,86 +1,125 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
-import "/home/user/Documents/Assignments/SpringPracticeAssignments/Student-Course/FrontEnd/university/src/App.css"
-
-const Heading = ({children}) => <h1>{children}</h1>
+import "/home/user/Documents/Assignments/SpringPracticeAssignments/Student-Course/FrontEnd/university/src/App.css";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import AppBar from "material-ui/AppBar";
+import RaisedButton from "material-ui/RaisedButton";
+import TextField from "material-ui/TextField";
+import { makeStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      firstName: "",
+      lastName: "",
       email: "",
       password: ""
     };
+    this.addUser = this.addUser.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
- handleChange = event => {
+  handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
+  };
+
+  async validateForm() {
+    if (!this.state.email.includes(".com")) {
+      alert("Please Enter a valid Email !");
+    } else {
+      this.addUser().then(this.props.registerUser());
+    }
   }
 
-  async addUser(registerUser)
-  {
-        const response=fetch("/user/add", {method:"POST", headers:{'Accept':'application/json',
-                'Content-Type':'application/json'}, body:JSON.stringify(this.state)}).then(alert("Successfully Registered !")).then(registerUser());
+  async addUser() {
+    const response = fetch("/user/add", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    }).then(alert("Successfully Registered !"));
 
-        if(!this.state.email.includes(".com"))
-        {
-             alert("Please Enter a valid Email !");
-        }
+    if (!this.state.email.includes(".com")) {
+      alert("Please Enter a valid Email !");
+    }
   }
 
   render() {
     return (
-      <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-
-          <Heading> <font color="#1DECEC"> Register </font></Heading>
-
-          <div className="Text-Color">
-              <FormGroup controlId="email" bsSize="large">
-                <ControlLabel> Email </ControlLabel><br/>
-                <FormControl
-                  autoFocus
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
+      <div>
+        <MuiThemeProvider>
+          <div>
+            <AppBar title="Register" />
+            <div className="Login">
+              <TextField
+                hintText="Enter your First Name"
+                floatingLabelText="First Name"
+                onChange={(event, newValue) =>
+                  this.setState({ firstName: newValue })
+                }
+              />
+              <br />
+              <TextField
+                hintText="Enter your Last Name"
+                floatingLabelText="Last Name"
+                onChange={(event, newValue) =>
+                  this.setState({ lastName: newValue })
+                }
+              />
+              <br />
+              <TextField
+                hintText="Enter your Email"
+                floatingLabelText="Email"
+                onChange={(event, newValue) =>
+                  this.setState({ email: newValue })
+                }
+              />
+              <br />
+              <TextField
+                type="password"
+                hintText="Enter your Password"
+                floatingLabelText="Password"
+                onChange={(event, newValue) =>
+                  this.setState({ password: newValue })
+                }
+              />
+              <br />
+              <RaisedButton
+                label="Register"
+                primary={true}
+                style={style}
+                onClick={() => this.validateForm(this.props.registerUser)}
+              />
+              <br />
+              <a>Already Registered?</a>
+              <RaisedButton
+                label="Login"
+                primary={true}
+                style={style}
+                onClick={() => this.props.registerUser()}
+              />
+            </div>
           </div>
-
-          <br/>
-
-          <div className="Text-Color">
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel> Password </ControlLabel><br/>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
-          </div>
-
-          <br/>
-
-          <Button className="glass"
-            block
-            bsSize="large"
-            onClick={() => {this.addUser(this.props.registerUser)}}
-            type="submit"
-          >
-            Register
-          </Button>
-        </form>
+        </MuiThemeProvider>
       </div>
     );
   }
 }
-
+const style = {
+  margin: 15
+};
 export default Register;
