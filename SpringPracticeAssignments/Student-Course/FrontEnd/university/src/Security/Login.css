@@ -1,55 +1,41 @@
-@media all and (min-width: 480px) {
-  .Login {
-    padding: 30px;
-    text-align: center;
-  }
+.Login {
+  padding: 30;
+  text-align: center;
+}
 
-  .root {
-    flex-grow: 1;
-  }
+.root {
+  flex-grow: 1;
+}
 
-  .menubutton {
-    margin-right: 2;
-  }
+.menubutton {
+  margin-right: 2;
+}
 
-  .title {
-    flex-grow: 1;
-  }
+.title {
+  flex-grow: 1;
+}
 
-  .mask {
-    padding: 30px;
-    margin: 0 auto;
-    max-width: 320px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: black;
-    opacity: 0.5;
+.Text-Color {
+  color: #000000;
+}
 
-    filter: blur(10px);
-    -webkit-filter: blur(10px);
-    -moz-filter: blur(10px);
-    -o-filter: blur(10px);
-    -ms-filter: blur(10px);
-    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='svgMask'><feGaussianBlur stdDeviation='10' /></filter></svg>#svgMask");
-  }
+.fontSize {
+  font-size: 12px;
+}
 
-  .Text-Color {
-    color: #000000;
-  }
-
-  .fontSize {
-    font-size: 12px;
-  }
-
-  .Login form {
-    margin: 0 auto;
-    max-width: 320px;
-  }
+.Login form {
+  margin: 0 auto;
+  max-width: 320px;
 }
 
 a {
   font-size: 12px;
+}
+.formControl {
+  margin: 1;
+  min-width: 120;
+}
+
+.selectempty {
+  margin-top: 2;
 }

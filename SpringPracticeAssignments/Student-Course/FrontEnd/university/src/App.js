@@ -3,13 +3,11 @@ import "./App.css";
 import "./Security/Login.css";
 import Login from "./Security/Login.js";
 import AddCourse from "./AddCourse.js";
-import Register from "./Security/Register.js";
 import Forms from "./forms/Forms.js";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AppBar from "material-ui/AppBar";
 import RaisedButton from "material-ui/RaisedButton";
-import TextField from "material-ui/TextField";
 
 class App extends React.Component {
   async componentDidMount() {
@@ -124,7 +122,7 @@ class App extends React.Component {
       isRegisteredCourse: false,
       isExpandStudent: false,
       isCourseClicked: false,
-      isStudentsClicked: false
+      isStudentsClicked: true
     });
   }
 
@@ -135,7 +133,7 @@ class App extends React.Component {
       isAddCourse: false,
       isRegisteredCourse: false,
       isExpandStudent: false,
-      isCourseClicked: false,
+      isCourseClicked: true,
       isStudentsClicked: false
     });
   }
@@ -180,7 +178,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.isAddCourse);
     if (!this.state.user) return <Login callback={this.changeLogin} />;
 
     if (this.state.isAddCourse)
@@ -196,12 +193,13 @@ class App extends React.Component {
     if (this.state.isAddStudent)
       return (
         <Forms
-          callback={event => {
-            event.preventDefault();
+          callBack={(event, ret) => {
+            let stuList = this.state.students;
+            if ("id" in ret) stuList = stuList.concat(ret);
             this.setState({
               isAddStudent: false,
               isLoggedIn: true,
-              isStudentsClicked: true
+              students: stuList
             });
           }}
           submiturl="/students"
@@ -212,9 +210,14 @@ class App extends React.Component {
     if (this.state.allCourses)
       return (
         <Forms
-          callback={event => {
-            event.preventDefault();
-            this.setState({ allCourses: false, isLoggedIn: true });
+          callBack={(event, ret) => {
+            let couList = this.state.courses;
+            if ("id" in ret) couList = couList.concat(ret);
+            this.setState({
+              allCourses: false,
+              isLoggedIn: true,
+              courses: couList
+            });
           }}
           submiturl="/courses"
           fields={{ courseName: "text" }}
@@ -223,97 +226,64 @@ class App extends React.Component {
 
     if (this.state.isStudentsClicked) {
       return (
-        <div className="App">
-          <div>
-            <button
-              onClick={() => {
-                this.changeHomeClicked();
-              }}
-            >
-              {" "}
-              Home{" "}
-            </button>
-            <br />
-            <br />
-          </div>
-          <div>
-            {this.state.students.map(student => (
-              <div key={student.id}>
-                {" "}
-                <Button
-                  block
-                  bsSize="large"
-                  onClick={() => {
-                    this.expandStudent(student.id);
-                  }}
-                >
-                  {" "}
-                  {student.name}
-                </Button>
-                <button
-                  className="Side"
-                  onClick={event => {
-                    this.removeStudent(student.id, event);
-                  }}
-                >
-                  Remove
-                </button>
+        <div>
+          <MuiThemeProvider>
+            <div>
+              <AppBar title="All Students" />
+              <div className="Login">
+                <RaisedButton
+                  label="Home"
+                  primary={true}
+                  style={style}
+                  onClick={() => this.changeHomeClicked()}
+                />
                 <br />
                 <br />
+                <div>
+                  {this.state.students.map(student => (
+                    <div key={student.id}>
+                      {" "}
+                      <button
+                        class="btn success"
+                        onClick={() => {
+                          this.expandStudent(student.id);
+                        }}
+                      >
+                        {student.name}
+                      </button>
+                      <RaisedButton
+                        label="Remove"
+                        primary={true}
+                        style={style}
+                        onClick={() => this.removeStudent(student.id)}
+                      />
+                      <br />
+                      <br />
+                    </div>
+                  ))}
+                </div>
+                <br />
+                <div>
+                  <RaisedButton
+                    label="Add Student"
+                    primary={true}
+                    style={style}
+                    onClick={() => this.changeAddStudent()}
+                  />
+                </div>
               </div>
-            ))}
-          </div>
-          <div>
-            <br />
-            <button
-              onClick={() => {
-                this.changeAddStudent();
-              }}
-            >
-              {" "}
-              Add Students{" "}
-            </button>
-            <br />
-          </div>
+            </div>
+          </MuiThemeProvider>
         </div>
       );
     }
 
     if (this.state.isCourseClicked) {
       return (
-        /*<div>
-            {this.state.courses.map(course => (
-              <div key={course.id}>
-                <div> {course.courseName} </div>
-                <button
-                  className="Side"
-                  onClick={event => {
-                    this.removeCourse(course.id, event);
-                  }}
-                >
-                  Remove
-                </button>
-                <br />
-                <br />
-              </div>
-            ))}
-          </div>
-          <div>
-            <br />
-            <button
-              onClick={() => {
-                this.changeAllCourses();
-              }}
-            >
-              {" "}
-              Add Course{" "}
-            </button>
-            <br />
-          </div>*/
         <div>
           <MuiThemeProvider>
             <div>
-              <AppBar title="htfghk" />
+              <AppBar title="All Courses" />
               <div className="Login">
                 <RaisedButton
                   label="Home"
@@ -335,17 +305,17 @@ class App extends React.Component {
                           onClick={() => this.removeCourse(course.id)}
                         />
                       </div>
-                      <br />
-                      <div>
-                        <RaisedButton
-                          label="Add Course"
-                          primary={true}
-                          style={style}
-                          onClick={() => this.changeAllCourses()}
-                        />
-                      </div>
                     </div>
                   ))}
+                </div>
+                <br />
+                <div>
+                  <RaisedButton
+                    label="Add Course"
+                    primary={true}
+                    style={style}
+                    onClick={() => this.changeAllCourses()}
+                  />
                 </div>
               </div>
             </div>
@@ -359,7 +329,9 @@ class App extends React.Component {
         <div>
           <MuiThemeProvider>
             <div>
-              <AppBar title="Student Info" />
+              {this.state.students.map(student => (
+                <AppBar title={student.name} />
+              ))}
               <div className="Login">
                 <RaisedButton
                   label="Home"

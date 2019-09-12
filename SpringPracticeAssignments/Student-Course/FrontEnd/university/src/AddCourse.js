@@ -1,11 +1,25 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import Register from "/home/user/Documents/Assignments/SpringPracticeAssignments/Student-Course/FrontEnd/university/src/Security/Register.js";
-import Login from "/home/user/Documents/Assignments/SpringPracticeAssignments/Student-Course/FrontEnd/university/src/Security/Login.css";
 import "./App.css";
-import { Dropdown } from "react-bootstrap";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import NativeSelect from "@material-ui/core/NativeSelect";
 
 class AddCourse extends React.Component {
+  classes = {
+    root: {
+      display: "flex",
+      flexWrap: "wrap"
+    },
+    formControl: {
+      margin: 1,
+      minWidth: 120
+    },
+    selectEmpty: {
+      marginTop: 2
+    }
+  };
   constructor(props) {
     super(props);
 

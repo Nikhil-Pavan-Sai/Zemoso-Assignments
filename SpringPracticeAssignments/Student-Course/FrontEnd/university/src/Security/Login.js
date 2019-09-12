@@ -34,7 +34,10 @@ class Login extends React.Component {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(this.state)
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password
+        })
       }).then(x => {
         if (x.status == 200) callback();
         else alert("Invalid Credentials !");

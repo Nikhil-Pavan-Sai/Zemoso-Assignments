@@ -2,6 +2,7 @@ package com.nikhil.StudentCourse.Controller;
 
 import com.nikhil.StudentCourse.Exception.ResourceNotFoundException;
 import com.nikhil.StudentCourse.Model.User;
+import com.nikhil.StudentCourse.Controller.Credentials;
 import com.nikhil.StudentCourse.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,12 @@ public class UserController
     UserRepo userRepo;
 
     @PostMapping("/user/validate")
-    public ResponseEntity<Credentials> validate(@Valid @RequestBody Credentials credentials) throws Exception
+    public ResponseEntity<User> validate(@RequestBody Credentials credentials) throws Exception
     {
         User u = userRepo.findByEmail(credentials.getEmail()).orElseThrow(ResourceNotFoundException::new);
         if(u.getPassword().equals(credentials.getPassword()))
         {
-            return ResponseEntity.ok(credentials);
+            return ResponseEntity.ok(u);
         }
         else
             throw new ResourceNotFoundException();

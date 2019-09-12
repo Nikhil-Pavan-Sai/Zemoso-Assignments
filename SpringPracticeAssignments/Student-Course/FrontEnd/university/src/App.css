@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.btn {
+/*.btn {
   height: 21px;
   line-height: 21px;
   text-align: center;
@@ -11,7 +11,7 @@
   padding-left: 10px;
   padding-right: 10px;
   min-width: 100px;
-}
+}*/
 
 /*.App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -19,9 +19,22 @@
   pointer-events: none;
 }*/
 
-.button {
+/*.button {
   margin: 20px;
   padding: 10px;
+}*/
+
+.btn {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn:hover {
+  background: #eee;
 }
 
 .body {

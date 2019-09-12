@@ -18,7 +18,7 @@ class Forms extends React.Component {
 
   async postchanges(event) {
     if (this.props.submiturl) {
-      await fetch(this.props.submiturl, {
+      const ret = await fetch(this.props.submiturl, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -26,8 +26,10 @@ class Forms extends React.Component {
         },
         body: JSON.stringify(this.state)
       });
+
+      const response = await ret.json();
+      if (this.props.callBack) this.props.callBack(event, response);
     }
-    if (this.props.callBack) this.props.callBack(event, this.state);
   }
 
   render() {
