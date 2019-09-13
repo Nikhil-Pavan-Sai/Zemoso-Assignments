@@ -2,28 +2,6 @@
   text-align: center;
 }
 
-/*.btn {
-  height: 21px;
-  line-height: 21px;
-  text-align: center;
-  width: auto;
-  border: 0px;
-  padding-left: 10px;
-  padding-right: 10px;
-  min-width: 100px;
-}*/
-
-/*.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}*/
-
-/*.button {
-  margin: 20px;
-  padding: 10px;
-}*/
-
 .btn {
   border: none;
   background-color: inherit;
