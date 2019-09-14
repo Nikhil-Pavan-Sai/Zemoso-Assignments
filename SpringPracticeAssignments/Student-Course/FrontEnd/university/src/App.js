@@ -295,15 +295,16 @@ class App extends React.Component {
                 <div>
                   {this.state.courses.map(course => (
                     <div key={course.id}>
-                      <div> {course.courseName} </div>
-                      <div>
-                        <RaisedButton
-                          label="Remove"
-                          primary={true}
-                          style={style}
-                          onClick={() => this.removeCourse(course.id)}
-                        />
-                      </div>
+                      {" "}
+                      {course.courseName}
+                      <RaisedButton
+                        label="Remove"
+                        primary={true}
+                        style={style}
+                        onClick={() => this.removeCourse(course.id)}
+                      />
+                      <br />
+                      <br />
                     </div>
                   ))}
                 </div>
@@ -417,15 +418,18 @@ class App extends React.Component {
                 onClick={() => this.changeCourseClicked()}
               />
               <br />
-              <RaisedButton
-                label="Logout"
-                primary={true}
-                style={style}
-                onClick={() => {
-                  localStorage.removeItem("user");
-                  this.setState({ user: null });
-                }}
-              />
+              <div className="Login">
+                <RaisedButton
+                  className="footer"
+                  label="Logout"
+                  primary={true}
+                  style={style}
+                  onClick={() => {
+                    localStorage.removeItem("user");
+                    this.setState({ user: null });
+                  }}
+                />
+              </div>
             </div>
           </div>
         </MuiThemeProvider>
