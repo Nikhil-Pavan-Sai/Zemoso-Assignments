@@ -2,8 +2,8 @@ package com.nikhil.StudentCourse.Controller;
 
 import com.nikhil.StudentCourse.Exception.ResourceNotFoundException;
 import com.nikhil.StudentCourse.Model.User;
-import com.nikhil.StudentCourse.Controller.Credentials;
 import com.nikhil.StudentCourse.Repository.UserRepo;
+import com.nikhil.StudentCourse.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +15,12 @@ import java.util.List;
 public class UserController
 {
     @Autowired
-    private
-    UserRepo userRepo;
+    private UserService userService;
 
     @PostMapping("/user/validate")
     public ResponseEntity<User> validate(@RequestBody Credentials credentials) throws Exception
     {
-        User u = userRepo.findByEmail(credentials.getEmail()).orElseThrow(ResourceNotFoundException::new);
+        User u = userService.findByEmail(credentials.getEmail()).orElseThrow(ResourceNotFoundException::new);
         if(u.getPassword().equals(credentials.getPassword()))
         {
             return ResponseEntity.ok(u);
@@ -33,42 +32,38 @@ public class UserController
     @PostMapping("user/add")
     public User addUser(@Valid @RequestBody User user)
     {
-        return userRepo.save(user);
+        return userService.addUser(user);
     }
 
     @GetMapping("/users")
     public List<User> getUser()
     {
-        return userRepo.findAll();
+        return userService.findAll();
     }
 
     @GetMapping("/user/{userId}")
     public User getStudentById(@PathVariable Long userId)
     {
-        return userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("Student: " + userId + " not found !"));
+        return userService.findUser(userId).orElseThrow(() -> new ResourceNotFoundException("Student: " + userId + " not found !"));
     }
 
     @PutMapping("/user/{userId}")
     public User updateUser(@PathVariable Long userId, @Valid @RequestBody User user)
     {
-        return userRepo.findById(userId).map(user1 -> {
+        return userService.findUser(userId).map(user1 -> {
             user1.setEmail(user.getEmail());
             user1.setPassword(user.getPassword());
             user1.setFirstName(user.getFirstName());
             user1.setLastName(user.getLastName());
-            return userRepo.save(user1);
+            return userService.addUser(user1);
         }).orElseThrow(() -> new ResourceNotFoundException("Student: " + userId + " not found !"));
     }
 
     @DeleteMapping("/user/{userId}")
     public void deleteUser(@PathVariable Long userId)
     {
-        userRepo.deleteById(userId);
+        User u = userService.findUser(userId).orElseThrow(ResourceNotFoundException::new);
+        userService.removeUser(u);
     }
 
-    @DeleteMapping("/users")
-    public void deleteAllUsers()
-    {
-        userRepo.deleteAll();
-    }
 }

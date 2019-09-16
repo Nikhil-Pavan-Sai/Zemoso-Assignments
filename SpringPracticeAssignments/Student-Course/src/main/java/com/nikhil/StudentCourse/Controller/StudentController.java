@@ -3,6 +3,7 @@ package com.nikhil.StudentCourse.Controller;
 import com.nikhil.StudentCourse.Exception.ResourceNotFoundException;
 import com.nikhil.StudentCourse.Model.Student;
 import com.nikhil.StudentCourse.Repository.StudentRepo;
+import com.nikhil.StudentCourse.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,40 +14,40 @@ import java.util.List;
 public class StudentController
 {
     @Autowired
-    private StudentRepo studentRepo;
+    private StudentService studentService;
 
     @PostMapping("/students")
     public Student createStudent(@Valid @RequestBody Student student)
     {
-        return studentRepo.save(student);
+        return studentService.addStudent(student);
     }
 
     @GetMapping("/students")
     public List<Student> getStudent()
     {
-        return studentRepo.findAll();
+        return studentService.findAll();
     }
 
     @GetMapping("/students/{studentId}")
     public Student getStudentById(@PathVariable Long studentId)
     {
-        return studentRepo.findById(studentId).orElseThrow(() -> new ResourceNotFoundException("Student: " + studentId + " not found !"));
+        return studentService.findStudent(studentId).orElseThrow(() -> new ResourceNotFoundException("Student: " + studentId + " not found !"));
     }
 
     @PutMapping("/students/{studentId}")
     public Student updateStudent(@PathVariable Long studentId, @Valid @RequestBody Student student)
     {
-        return studentRepo.findById(studentId).map(student1 -> {
+        return studentService.findStudent(studentId).map(student1 -> {
             student1.setName(student.getName());
             student1.setStandard(student.getStandard());
             student1.setBranch(student.getBranch());
-            return studentRepo.save(student1);
+            return studentService.addStudent(student1);
         }).orElseThrow(() -> new ResourceNotFoundException("Student: " + studentId + " not found !"));
     }
 
     @DeleteMapping("/students/{studentId}")
     public void deleteStudent(@PathVariable Long studentId)
     {
-        studentRepo.deleteById(studentId);
+        studentService.removeStudent(studentId);
     }
 }
