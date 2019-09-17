@@ -31,7 +31,7 @@ public class CourseDAOImpl implements CourseDAO {
     public boolean remove(Long key) {
         try{
             Session session = (Session) entityManager.getDelegate();
-            session.remove(key);
+            session.remove(find(key));
             return true;
         }
         catch (Exception e)
