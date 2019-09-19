@@ -1,4 +1,4 @@
-package com.nikhil.StudentCourse.Services;
+package com.nikhil.StudentCourse.Services.ServiceInterfaces;
 
 import com.nikhil.StudentCourse.Model.Course;
 

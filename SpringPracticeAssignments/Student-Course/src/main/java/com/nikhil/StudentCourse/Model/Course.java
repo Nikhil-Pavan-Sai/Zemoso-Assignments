@@ -1,5 +1,6 @@
 package com.nikhil.StudentCourse.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -19,7 +20,8 @@ public class Course
     @NaturalId
     private String courseName;
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
@@ -48,5 +50,13 @@ public class Course
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

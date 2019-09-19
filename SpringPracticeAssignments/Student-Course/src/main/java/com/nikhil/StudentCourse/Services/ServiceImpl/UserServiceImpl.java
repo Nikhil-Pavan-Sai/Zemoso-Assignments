@@ -1,7 +1,8 @@
-package com.nikhil.StudentCourse.Services;
+package com.nikhil.StudentCourse.Services.ServiceImpl;
 
-import com.nikhil.StudentCourse.DAOs.UserDAO;
+import com.nikhil.StudentCourse.DAOs.DAOInterfaces.UserDAO;
 import com.nikhil.StudentCourse.Model.User;
+import com.nikhil.StudentCourse.Services.ServiceInterfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

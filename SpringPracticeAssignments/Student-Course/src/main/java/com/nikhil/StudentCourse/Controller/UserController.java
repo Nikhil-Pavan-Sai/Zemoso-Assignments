@@ -2,8 +2,7 @@ package com.nikhil.StudentCourse.Controller;
 
 import com.nikhil.StudentCourse.Exception.ResourceNotFoundException;
 import com.nikhil.StudentCourse.Model.User;
-import com.nikhil.StudentCourse.Repository.UserRepo;
-import com.nikhil.StudentCourse.Services.UserService;
+import com.nikhil.StudentCourse.Services.ServiceInterfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

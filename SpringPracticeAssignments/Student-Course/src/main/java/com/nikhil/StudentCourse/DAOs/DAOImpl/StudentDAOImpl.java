@@ -1,5 +1,6 @@
-package com.nikhil.StudentCourse.DAOs;
+package com.nikhil.StudentCourse.DAOs.DAOImpl;
 
+import com.nikhil.StudentCourse.DAOs.DAOInterfaces.StudentDAO;
 import com.nikhil.StudentCourse.Model.Student;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class StudentDAOImpl implements StudentDAO{
+public class StudentDAOImpl implements StudentDAO {
 
     @Autowired
     private EntityManager entityManager;
@@ -31,7 +32,7 @@ public class StudentDAOImpl implements StudentDAO{
     public boolean remove(Long key) {
         try{
             Session session = (Session) entityManager.getDelegate();
-            session.remove(find(key));
+            session.remove(find(key).get());
             return true;
         }
         catch (Exception e)
@@ -57,16 +58,9 @@ public class StudentDAOImpl implements StudentDAO{
 
     @Override
     public Student save(Student entry) {
-        try{
-            Session session=(Session) entityManager.getDelegate();
-            session.save(entry);
-            return entry;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
+        Session session = (Session) entityManager.getDelegate();
+        session.persist(session.contains(entry)?entry:session.merge(entry));
+        return entry;
     }
 
 }

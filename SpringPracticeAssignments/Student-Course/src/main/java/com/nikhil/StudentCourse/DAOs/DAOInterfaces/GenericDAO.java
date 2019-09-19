@@ -1,4 +1,4 @@
-package com.nikhil.StudentCourse.DAOs;
+package com.nikhil.StudentCourse.DAOs.DAOInterfaces;
 
 
 import java.io.Serializable;

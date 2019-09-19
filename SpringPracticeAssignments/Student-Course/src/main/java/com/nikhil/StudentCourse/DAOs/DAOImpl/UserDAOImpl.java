@@ -1,6 +1,7 @@
-package com.nikhil.StudentCourse.DAOs;
+package com.nikhil.StudentCourse.DAOs.DAOImpl;
 
-import com.nikhil.StudentCourse.Model.Course;
+import com.nikhil.StudentCourse.DAOs.DAOInterfaces.UserDAO;
+import com.nikhil.StudentCourse.Model.User;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,28 +11,35 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class CourseDAOImpl implements CourseDAO {
-
+public class UserDAOImpl implements UserDAO {
     @Autowired
     private EntityManager entityManager;
 
     @Override
-    public List<Course> list() {
+    public Optional<User> findByEmail(String email)
+    {
+        Session session = (Session) entityManager.getDelegate();
+        return Optional.ofNullable(session.createQuery("from User where email="+"'"+email+"'",User.class).getSingleResult());
+    }
+
+
+    @Override
+    public List<User> list() {
         Session currentSession = (Session) entityManager.getDelegate();
-        return currentSession.createQuery("from Course",Course.class).getResultList();
+        return currentSession.createQuery("from User",User.class).getResultList();
     }
 
     @Override
-    public Optional<Course> find(Long key) {
+    public Optional<User> find(Long key) {
         Session currentSession = (Session) entityManager.getDelegate();
-        return Optional.ofNullable(currentSession.get(Course.class,key));
+        return Optional.ofNullable(currentSession.get(User.class,key));
     }
 
     @Override
     public boolean remove(Long key) {
         try{
             Session session = (Session) entityManager.getDelegate();
-            session.remove(find(key));
+            session.remove(find(key).get());
             return true;
         }
         catch (Exception e)
@@ -42,7 +50,7 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     @Override
-    public boolean remove(Course entry) {
+    public boolean remove(User entry) {
         try{
             Session session = (Session) entityManager.getDelegate();
             session.remove(entry);
@@ -56,16 +64,9 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     @Override
-    public Course save(Course entry) {
-        try{
+    public User save(User entry) {
             Session session=(Session) entityManager.getDelegate();
-            session.save(entry);
+            session.persist(entry);
             return entry;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
     }
 }
