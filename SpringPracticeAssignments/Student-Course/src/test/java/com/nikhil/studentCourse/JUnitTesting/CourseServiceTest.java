@@ -30,15 +30,15 @@ public class CourseServiceTest {
     private AtomicInteger currentIndex = new AtomicInteger(0);
 
     @Autowired
-    private CourseService courseService;
+    private CourseService courseService=null;
 
     @Autowired
-    private StudentService studentService;
+    private StudentService studentService=null;
 
     private String getRandomString(int size) {
         StringBuilder sb = new StringBuilder(size);
         for(int i=0;i<size;i++)
-            sb.append((char)('a'+getRandomInt(25)));
+            sb.append((char)('a'+getRandomInt(8)));
         return sb.toString();
     }
 
@@ -55,7 +55,7 @@ public class CourseServiceTest {
     @Before
     public void init() {
         Student student = new Student();
-        student.setName(getRandomString(getRandomInt(100)));
+        student.setName(getRandomString(getRandomInt(8)));
         student.setBranch(getRandomString(getRandomInt(3)));
         student.setStandard(getRandomString(getRandomInt(5)));
 
