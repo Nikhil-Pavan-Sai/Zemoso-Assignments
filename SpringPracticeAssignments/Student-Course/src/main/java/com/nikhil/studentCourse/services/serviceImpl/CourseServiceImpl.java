@@ -15,7 +15,7 @@ public class CourseServiceImpl implements CourseService
 {
 
     @Autowired
-    private CourseDAO courseDAO;
+    private CourseDAO courseDAO=null;
 
     @Override
     @Transactional
