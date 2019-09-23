@@ -51,22 +51,19 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean remove(User entry) {
-        try{
-            Session session = (Session) entityManager.getDelegate();
-            session.remove(entry);
+        Optional<User> currUser = find(entry.getId());
+        if (currUser.isPresent()) {
+            entityManager.remove(currUser.get());
             return true;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
         }
         return false;
     }
 
     @Override
     public User save(User entry) {
-            Session session=(Session) entityManager.getDelegate();
-            session.persist(entry);
+            Session currentSession = (Session)entityManager.getDelegate();
+            if(currentSession.contains(entry)){ currentSession.merge(entry);}
+            else{ currentSession.save(entry); }
             return entry;
     }
 }

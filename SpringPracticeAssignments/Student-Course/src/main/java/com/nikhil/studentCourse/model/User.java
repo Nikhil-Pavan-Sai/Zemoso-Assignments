@@ -14,16 +14,29 @@ public class User
     private Long id;
 
     @NotNull
+    @NaturalId
     private String firstName;
 
     @NotNull
+    @NaturalId
     private String lastName;
 
     @NaturalId
     private String email;
 
     @NotNull
+    @NaturalId
     private String password;
+
+    public User copy(){
+        User user = new User();
+        user.setId(this.id);
+        user.setFirstName(this.getFirstName());
+        user.setLastName(this.getLastName());
+        user.setEmail(this.getEmail());
+        user.setPassword(this.getPassword());
+        return user;
+    }
 
     public Long getId() {
         return id;

@@ -44,21 +44,20 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public boolean remove(Student entry) {
-        try{
-            Session session = (Session) entityManager.getDelegate();
-            session.remove(entry);
+        Optional<Student> currStudent = find(entry.getId());
+        if (currStudent.isPresent()) {
+            entityManager.remove(currStudent.get());
             return true;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
         }
         return false;
     }
 
     @Override
     public Student save(Student entry) {
-        entityManager.merge(entry);
+
+        Session currentSession = (Session)entityManager.getDelegate();
+        if (currentSession.contains(entry)){ currentSession.merge(entry); }
+        else { currentSession.save(entry); }
         return entry;
     }
 

@@ -14,16 +14,18 @@ public class Student
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     @NaturalId
     private String name;
 
     @NotNull
+    @NaturalId
     private String standard;
 
     @NotNull
+    @NaturalId
     private String branch;
 
     @JsonIgnore
@@ -56,11 +58,11 @@ public class Student
         return student;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    private void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

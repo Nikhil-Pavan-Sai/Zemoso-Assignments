@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService
 {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserDAO userDAO=null;
 
     @Override
     @Transactional
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService
 
     @Override
     @Transactional
-    public boolean removeUser(long id) {
+    public boolean removeUser(Long id) {
         return userDAO.remove(id);
     }
 

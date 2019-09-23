@@ -31,7 +31,7 @@ public class CourseServiceImpl implements CourseService
 
     @Override
     @Transactional
-    public boolean removeCourse(long id) {
+    public boolean removeCourse(Long id) {
         return courseDAO.remove(id);
     }
 

@@ -31,7 +31,7 @@ public class StudentServiceImpl implements StudentService
 
     @Override
     @Transactional
-    public boolean removeStudent(long id) {
+    public boolean removeStudent(Long id) {
         return studentDao.remove(id);
     }
 

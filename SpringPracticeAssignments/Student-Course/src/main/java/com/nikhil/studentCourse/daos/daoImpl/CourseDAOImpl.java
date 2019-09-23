@@ -43,20 +43,19 @@ public class CourseDAOImpl implements CourseDAO {
 
     @Override
     public boolean remove(Course entry) {
-        try{
-            entityManager.remove(entry);
-            return true;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return false;
+            Optional<Course> currCourse = find(entry.getId());
+            if (currCourse.isPresent()) {
+                entityManager.remove(currCourse.get());
+                return true;
+            }
+            return false;
     }
 
     @Override
     public Course save(Course entry) {
-            entityManager.merge(entry);
+            Session currentSession = (Session)entityManager.getDelegate();
+            if (currentSession.contains(entry)){ currentSession.merge(entry); }
+            else{ currentSession.save(entry); }
             return entry;
     }
 }

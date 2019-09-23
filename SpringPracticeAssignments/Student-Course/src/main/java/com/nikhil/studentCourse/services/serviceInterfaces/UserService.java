@@ -10,7 +10,7 @@ public interface UserService
 
     User addUser(User user);
     boolean removeUser(User user);
-    boolean removeUser(long id);
+    boolean removeUser(Long id);
     Optional<User> findUser(Long id);
     User updateUser(User user);
     List<User> findAll();

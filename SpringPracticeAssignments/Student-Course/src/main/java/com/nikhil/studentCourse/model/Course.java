@@ -14,7 +14,7 @@ public class Course
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     @NaturalId
@@ -32,15 +32,11 @@ public class Course
     public Course() {
     }
 
-    public Course(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    private void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
