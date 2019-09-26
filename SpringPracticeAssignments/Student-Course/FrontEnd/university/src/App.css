@@ -48,3 +48,34 @@
   margin-right: 50%;
   padding: 30;
 }
+
+.formControl {
+  margin: 1;
+  min-width: 120;
+}
+
+.option {
+  width: 250px;
+  padding: 30;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+.center {
+  text-align: center;
+  align-items: center;
+  padding: 30;
+  min-width: 120;
+}
+
+.cmb {
+  display: block;
+  margin: 0 auto;
+}
+
+.menuButton {
+  margin-left: auto;
+  margin-right: auto;
+  width: 20em;
+}

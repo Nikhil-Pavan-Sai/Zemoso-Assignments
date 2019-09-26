@@ -36,6 +36,7 @@ class App extends React.Component {
     this.changeAllCourses = this.changeAllCourses.bind(this);
     this.removeCourse = this.removeCourse.bind(this);
     this.removeStudent = this.removeStudent.bind(this);
+    this.removeCourseFromStudent = this.removeCourseFromStudent.bind(this);
     this.state = {
       isLoggedIn: false,
       isStudentsClicked: false,
@@ -47,6 +48,7 @@ class App extends React.Component {
       isAddCourse: false,
       allCourses: false,
       currId: null,
+      courseId: null,
       students: [],
       courses: [],
       student_courses: []
@@ -152,6 +154,21 @@ class App extends React.Component {
     });
   }
 
+  removeCourseFromStudent(stId, id) {
+    fetch("students/" + stId + "/courses/" + id, { method: "DELETE" });
+    const isNotId = item => item.id !== id;
+    const newCourses = this.state.courses.filter(isNotId);
+    this.setState({
+      student_courses: newCourses,
+      isLoggedIn: true,
+      isAddCourse: false,
+      isRegisteredCourse: false,
+      isExpandStudent: true,
+      isCourseClicked: false,
+      isStudentsClicked: false
+    });
+  }
+
   removeStudent(id, event) {
     fetch("/students/" + id, { method: "DELETE" });
     const isNotId = item => item.id !== id;
@@ -186,6 +203,7 @@ class App extends React.Component {
           callback={() => {
             this.setState({ isAddCourse: false });
           }}
+          goHome={() => this.changeHomeClicked()}
         />
       );
 
@@ -374,26 +392,39 @@ class App extends React.Component {
       return (
         <div>
           <MuiThemeProvider>
-            <div>
-              <AppBar title="Registered Courses" />
-              <div className="Login">
-                <RaisedButton
-                  label="Home"
-                  primary={true}
-                  style={style}
-                  onClick={() => this.changeHomeClicked()}
-                />
-                <br />
-                <div>
-                  {this.state.student_courses.map(stCourse => (
-                    <div>
-                      {stCourse.courseName}
-                      <br />
-                    </div>
-                  ))}
+            {this.state.students.map(student => (
+              <div key={student.id}>
+                <AppBar title="Registered Courses" />
+                <div className="Login">
+                  <RaisedButton
+                    label="Home"
+                    primary={true}
+                    style={style}
+                    onClick={() => this.changeHomeClicked()}
+                  />
+                  <br />
+                  <div>
+                    {this.state.student_courses.map(stCourse => (
+                      <div key={stCourse.id}>
+                        {stCourse.courseName}
+                        <RaisedButton
+                          label="Remove"
+                          primary={true}
+                          style={style}
+                          onClick={() =>
+                            this.removeCourseFromStudent(
+                              student.id,
+                              stCourse.id
+                            )
+                          }
+                        />
+                        <br />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </MuiThemeProvider>
         </div>
       );
@@ -440,4 +471,5 @@ class App extends React.Component {
 const style = {
   margin: 15
 };
+
 export default App;

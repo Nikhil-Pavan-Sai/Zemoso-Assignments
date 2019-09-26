@@ -37,26 +37,19 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean remove(Long key) {
-        try{
-            Session session = (Session) entityManager.getDelegate();
-            session.remove(find(key).get());
-            return true;
-        }
-        catch (Exception e)
+        Session currSession = (Session) entityManager.getDelegate();
+        Optional<User> currUser = find(key);
+        if (currUser.isPresent())
         {
-            e.printStackTrace();
+            currSession.createQuery("delete from User where id=" + key).executeUpdate();
+            return true;
         }
         return false;
     }
 
     @Override
     public boolean remove(User entry) {
-        Optional<User> currUser = find(entry.getId());
-        if (currUser.isPresent()) {
-            entityManager.remove(currUser.get());
-            return true;
-        }
-        return false;
+        return remove(entry.getId());
     }
 
     @Override

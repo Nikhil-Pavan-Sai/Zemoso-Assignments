@@ -29,26 +29,19 @@ public class CourseDAOImpl implements CourseDAO {
 
     @Override
     public boolean remove(Long key) {
-        try{
-            Session session = (Session) entityManager.getDelegate();
-            session.remove(find(key).get());
-            return true;
-        }
-        catch (Exception e)
+        Session currSession = (Session) entityManager.getDelegate();
+        Optional<Course> currCourse = find(key);
+        if (currCourse.isPresent())
         {
-            e.printStackTrace();
+            currSession.createQuery("delete from Course where id=" + key).executeUpdate();
+            return true;
         }
         return false;
     }
 
     @Override
     public boolean remove(Course entry) {
-            Optional<Course> currCourse = find(entry.getId());
-            if (currCourse.isPresent()) {
-                entityManager.remove(currCourse.get());
-                return true;
-            }
-            return false;
+        return remove(entry.getId());
     }
 
     @Override

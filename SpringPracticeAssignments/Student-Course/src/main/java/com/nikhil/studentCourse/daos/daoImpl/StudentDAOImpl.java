@@ -1,6 +1,8 @@
 package com.nikhil.studentCourse.daos.daoImpl;
 
+import com.nikhil.studentCourse.daos.daoInterfaces.CourseDAO;
 import com.nikhil.studentCourse.daos.daoInterfaces.StudentDAO;
+import com.nikhil.studentCourse.model.Course;
 import com.nikhil.studentCourse.model.Student;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,16 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public class StudentDAOImpl implements StudentDAO {
 
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    private CourseDAO courseDAO;
 
     @Override
     public List<Student> list() {
@@ -30,23 +36,32 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public boolean remove(Long key) {
-        try{
-            Session session = (Session) entityManager.getDelegate();
-            session.remove(find(key).get());
-            return true;
-        }
-        catch (Exception e)
+        Session currSession = (Session) entityManager.getDelegate();
+        Optional<Student> currStudent = find(key);
+        if (currStudent.isPresent())
         {
-            e.printStackTrace();
+            currSession.createQuery("delete from Student where id=" + key).executeUpdate();
+            return true;
         }
         return false;
     }
 
     @Override
     public boolean remove(Student entry) {
-        Optional<Student> currStudent = find(entry.getId());
-        if (currStudent.isPresent()) {
-            entityManager.remove(currStudent.get());
+        return remove(entry.getId());
+    }
+
+    @Override
+    public boolean remove(Long stKey, Long coKey)
+    {
+        Optional<Student> currStudent = find(stKey);
+        if (currStudent.isPresent())
+        {
+            Student student = currStudent.get();
+            Set<Course> stCourse = student.getCourses();
+            stCourse.remove(courseDAO.find(coKey).get());
+            student.setCourses(stCourse);
+            save(student);
             return true;
         }
         return false;

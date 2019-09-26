@@ -28,18 +28,6 @@ public class CourseController
         return courseService.addCourse(course);
     }
 
-    @PostMapping("/students/{studentId}/courses")
-    public Student addCourseToStudent(@PathVariable (value = "studentId") Long studentId, @Valid @RequestBody Course course)
-    {
-        System.out.println(studentId + " " + course.getCourseName());
-        Student student= studentService.findStudent(studentId).orElseThrow(() -> new ResourceNotFoundException("Courses not found !"));
-        Set<Course> set = student.getCourses();
-        set.add(course);
-        student.setCourses(set);
-        studentService.addStudent(student);
-        return student;
-    }
-
     @GetMapping("/courses")
     public List<Course> getCourse()
     {
@@ -50,13 +38,6 @@ public class CourseController
     public Course getCourseById(@PathVariable Long courseId)
     {
         return courseService.findCourse(courseId).orElseThrow(() -> new ResourceNotFoundException("Student: " + courseId + " not found !"));
-    }
-
-    @GetMapping("/students/{studentId}/courses")
-    public List<Course> getStudentCourse(@PathVariable (value="studentId") Long studentId)
-    {
-        Student student= studentService.findStudent(studentId).orElseThrow(ResourceNotFoundException::new);
-        return new ArrayList<>(student.getCourses());
     }
 
     @PutMapping("/courses/{courseId}")

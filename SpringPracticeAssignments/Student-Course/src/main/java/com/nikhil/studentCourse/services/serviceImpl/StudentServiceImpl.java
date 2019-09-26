@@ -35,6 +35,12 @@ public class StudentServiceImpl implements StudentService
         return studentDao.remove(id);
     }
 
+    @Transactional
+    public boolean removeCourseFromStudent(Long stKey, Long coKey)
+    {
+        return studentDao.remove(stKey,coKey);
+    }
+
     @Override
     @Transactional
     public Optional<Student> findStudent(Long id) {

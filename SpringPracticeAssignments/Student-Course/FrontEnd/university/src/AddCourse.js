@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import "./App.css";
 import "./Security/Login.css";
+import Select from "react-select";
+import { RaisedButton } from "material-ui";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import AppBar from "material-ui/AppBar";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Container } from "@material-ui/core";
 
 class AddCourse extends React.Component {
   constructor(props) {
@@ -18,7 +28,11 @@ class AddCourse extends React.Component {
   async componentDidMount() {
     const course_response = await fetch("/courses");
     const course_body = await course_response.json();
-    this.setState({ options: course_body });
+    const lis = [];
+    course_body.forEach(item =>
+      lis.push({ label: item.courseName, value: item.id })
+    );
+    this.setState({ options: lis });
   }
 
   changeAddCourse() {
@@ -26,19 +40,23 @@ class AddCourse extends React.Component {
   }
 
   async addCourseToStudent(callback) {
-    const response = fetch("/students/" + this.props.id + "/courses", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(this.state)
-    });
+    const response = fetch(
+      "/students/" + this.props.id + "/courses/" + this.state.selected,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.state)
+      }
+    );
   }
 
   handleChange = event => {
+    console.log(event);
     this.setState({
-      selected: event.target.value
+      selected: event.value
     });
   };
 
@@ -50,7 +68,7 @@ class AddCourse extends React.Component {
         break;
       }
     }
-    fetch("/students/" + this.props.id + "/courses", {
+    fetch("/students/" + this.props.id + "/courses/" + this.state.selected, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -63,26 +81,37 @@ class AddCourse extends React.Component {
 
   render() {
     return (
-      <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-          <select onChange={this.handleChange} width="500px">
-            <option selected disabled hidden>
-              Choose here
-            </option>
-            {this.state.options.map(option => (
-              <option key={option.id} value={option.courseName}>
-                {option.courseName}
-              </option>
-            ))}
-          </select>
-          <br />
-          <br />
-          <button onClick={this.handleSubmit}> Add </button>
-          <br />
-          <br />
-          <button onClick={() => {}}>Home</button>
-        </form>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <AppBar title="Choose Course" />
+          <div className="menuButton">
+            <div className="menuButton">
+              <Select
+                className="cmb"
+                options={this.state.options}
+                onChange={this.handleChange}
+              />
+            </div>
+            <br />
+            <div className="center">
+              <RaisedButton
+                label="Assign"
+                primary={true}
+                onClick={this.handleSubmit}
+              ></RaisedButton>
+              <br />
+              <br />
+              <RaisedButton
+                label="Home"
+                primary={true}
+                onClick={() => {
+                  this.props.goHome();
+                }}
+              ></RaisedButton>
+            </div>
+          </div>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
