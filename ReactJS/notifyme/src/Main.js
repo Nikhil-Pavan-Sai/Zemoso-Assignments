@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -17,6 +17,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
+import Forms from "./BasicForm";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -68,35 +69,15 @@ const useStyles = makeStyles(theme => ({
 
 export default function Main(props) {
   const classes = useStyles();
-  const [state, setState] = useState({ home: false });
-  const [user, setUser] = localStorage.getItem("user");
+  const [state, setState] = useState({ home: false, add: false });
   const [values, setValues] = React.useState({
-    age: "",
-    name: "hai"
+    name: ""
   });
-  const [expand, setExpand] = React.useState([
-    {
-      title: "React JS",
-      subTitle: "14 September 2019",
-      overview:
-        "This impressive paella is a perfect party dish and a fun meal tocook together with your guests. Add 1 cup of frozen peas alongwith the mussels, if you like",
-      content:
-        "In a typical Redux app, there is just a single store with a single root reducing function. As your app grows, you split the root reducer into smaller reducers independently operating on the different parts of the state tree. This is exactly like how there is just one root component in a React app, but it is composed out of many small components.",
-      isExanded: false
-    },
-    {
-      title: "Spring Boot",
-      subTitle: "02 October 2019",
-      overview: "Hey this is super freaking awesome.",
-      content:
-        "In a typical Redux app, there is just a single store with a single root reducing function. As your app grows, you split the root reducer into smaller reducers independently operating on the different parts of the state tree. This is exactly like how there is just one root component in a React app, but it is composed out of many small components.",
-      isExanded: false
-    }
-  ]);
+  const [expand, setExpand] = React.useState([]);
   const handleChange = event => {
     setValues(oldValues => ({
       ...oldValues,
-      [event.target.name]: event.target.value
+      name: event.target.value
     }));
   };
 
@@ -104,15 +85,14 @@ export default function Main(props) {
     setExpand([
       ...expand.slice(0, idx),
       {
-        title: expand[idx].title,
-        subTitle: expand[idx].subTitle,
-        overview: expand[idx].overview,
-        content: expand[idx].content,
+        CourseName: expand[idx].CourseName,
+        Date: expand[idx].Date,
+        Overview: expand[idx].Overview,
+        Content: expand[idx].Content,
         isExpanded: !expand[idx].isExpanded
       },
       ...expand.slice(idx + 1)
     ]);
-    console.log(expand);
   };
 
   if (!state.home) {
@@ -125,7 +105,10 @@ export default function Main(props) {
             </Typography>
             <Button
               color="inherit"
-              onClick={() => setState({ ...state, home: true })}
+              onClick={() => {
+                setState({ ...state, home: true, add: true });
+                localStorage.removeItem("user");
+              }}
             >
               Logout
             </Button>
@@ -133,9 +116,9 @@ export default function Main(props) {
         </AppBar>
         <div className={classes.formControl}>
           <FormControl>
-            <InputLabel htmlFor="age-simple">Assignment</InputLabel>
+            <InputLabel htmlFor="age-simple">Task</InputLabel>
             <Select
-              value={values.age}
+              value={values.name}
               onChange={handleChange}
               inputProps={{
                 name: "age",
@@ -145,11 +128,14 @@ export default function Main(props) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={1}>Spring Boot</MenuItem>
-              <MenuItem value={2}>Hibernate</MenuItem>
-              <MenuItem value={3}>Reatc JS</MenuItem>
-              <MenuItem value={4}>HTML</MenuItem>
-              <MenuItem value={5}>Software Engineering</MenuItem>
+              <MenuItem value={"Spring Boot"}>Spring Boot</MenuItem>
+              <MenuItem value={"Hibernate"}>Hibernate</MenuItem>
+              <MenuItem value={"Reatc JS"}>Reatc JS</MenuItem>Date
+              <MenuItem value={"HTML"}>HTML</MenuItem>Date
+              <MenuItem value={"Software Engineering"}>
+                Software Engineering
+              </MenuItem>
+              Date
             </Select>
           </FormControl>
           <br />
@@ -158,18 +144,21 @@ export default function Main(props) {
             variant="contained"
             color="primary"
             className={classes.button}
+            onClick={() => {
+              setState({ ...state, home: true });
+            }}
           >
-            Assign
+            Add
           </Button>
         </div>
         <div className={classes.divClass}>
           {expand.map((x, idx) => (
             <Card className={classes.card} key={idx}>
-              <CardHeader title={x.title} subheader={x.subTitle} />
+              <CardHeader title={values.name} subheader={x.Date} />
 
               <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  {x.overview}
+                  {x.Overview}
                 </Typography>
               </CardContent>
               <CardActions disableSpacing>
@@ -188,13 +177,29 @@ export default function Main(props) {
               </CardActions>
               <Collapse in={x.isExpanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                  <Typography paragraph>{x.content}</Typography>
+                  <Typography paragraph>{x.Content}</Typography>
                 </CardContent>
               </Collapse>
             </Card>
           ))}
         </div>
       </div>
+    );
+  }
+  if (!state.add) {
+    return (
+      <Forms
+        callback={(event, ret) => {
+          setState({ home: false });
+          if (ret) setExpand([...expand, ret]);
+        }}
+        fields={{
+          Date: "text",
+          Overview: "text",
+          Content: "text"
+        }}
+        newProp={values.name}
+      />
     );
   }
   return <Login goBack={() => setState({ ...state, home: false })} />;

@@ -68,11 +68,12 @@ export default function Login() {
     name: "",
     password: ""
   });
+  const [user, setUser] = useState(localStorage.getItem("user"));
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  if (!state.login && !state.register) {
+  if (!state.login && !state.register && !user) {
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -119,9 +120,10 @@ export default function Login() {
               color="primary"
               className={classes.submit}
               onClick={() => {
-                if (validate(values.name, values.password))
+                if (validate(values.name, values.password)) {
                   setState({ ...state, login: true });
-                else {
+                  localStorage.setItem("user", values.name);
+                } else {
                   setState({ ...state, login: false });
                 }
               }}
