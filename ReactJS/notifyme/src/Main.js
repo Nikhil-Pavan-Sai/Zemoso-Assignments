@@ -24,7 +24,9 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   card: {
+    minWidth: 300,
     maxWidth: 300,
+    minHeight: 250,
     margin: 30
   },
   menuButton: {
@@ -73,6 +75,7 @@ export default function Main(props) {
   const [values, setValues] = React.useState({
     name: ""
   });
+  var cardsInfo = [10];
   const [expand, setExpand] = React.useState([]);
   const handleChange = event => {
     setValues(oldValues => ({
@@ -115,29 +118,32 @@ export default function Main(props) {
           </Toolbar>
         </AppBar>
         <div className={classes.formControl}>
-          <FormControl>
-            <InputLabel htmlFor="age-simple">Task</InputLabel>
-            <Select
-              value={values.name}
-              onChange={handleChange}
-              inputProps={{
-                name: "age",
-                id: "age-simple"
-              }}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={"Spring Boot"}>Spring Boot</MenuItem>
-              <MenuItem value={"Hibernate"}>Hibernate</MenuItem>
-              <MenuItem value={"Reatc JS"}>Reatc JS</MenuItem>Date
-              <MenuItem value={"HTML"}>HTML</MenuItem>Date
-              <MenuItem value={"Software Engineering"}>
-                Software Engineering
-              </MenuItem>
-              Date
-            </Select>
-          </FormControl>
+          <div minWidth="100">
+            <FormControl>
+              <InputLabel htmlFor="age-simple">Task</InputLabel>
+              <Select
+                minWidth="100"
+                value={values.name}
+                onChange={handleChange}
+                inputProps={{
+                  name: "age",
+                  id: "age-simple"
+                }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"Spring Boot"}>Spring Boot</MenuItem>
+                <MenuItem value={"Hibernate"}>Hibernate</MenuItem>
+                <MenuItem value={"Reatc JS"}>Reatc JS</MenuItem>Date
+                <MenuItem value={"HTML"}>HTML</MenuItem>Date
+                <MenuItem value={"Software Engineering"}>
+                  Software Engineering
+                </MenuItem>
+                Date
+              </Select>
+            </FormControl>
+          </div>
           <br />
           <br />
           <Button
@@ -154,7 +160,7 @@ export default function Main(props) {
         <div className={classes.divClass}>
           {expand.map((x, idx) => (
             <Card className={classes.card} key={idx}>
-              <CardHeader title={values.name} subheader={x.Date} />
+              <CardHeader title={x.CourseName} subheader={x.Date} />
 
               <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
