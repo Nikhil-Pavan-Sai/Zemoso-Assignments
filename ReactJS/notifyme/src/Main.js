@@ -75,7 +75,6 @@ export default function Main(props) {
   const [values, setValues] = React.useState({
     name: ""
   });
-  var cardsInfo = [10];
   const [expand, setExpand] = React.useState([]);
   const handleChange = event => {
     setValues(oldValues => ({
@@ -118,7 +117,7 @@ export default function Main(props) {
           </Toolbar>
         </AppBar>
         <div className={classes.formControl}>
-          <div minWidth="100">
+          <div>
             <FormControl>
               <InputLabel htmlFor="age-simple">Task</InputLabel>
               <Select
@@ -130,9 +129,6 @@ export default function Main(props) {
                   id: "age-simple"
                 }}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
                 <MenuItem value={"Spring Boot"}>Spring Boot</MenuItem>
                 <MenuItem value={"Hibernate"}>Hibernate</MenuItem>
                 <MenuItem value={"Reatc JS"}>Reatc JS</MenuItem>Date
@@ -160,7 +156,10 @@ export default function Main(props) {
         <div className={classes.divClass}>
           {expand.map((x, idx) => (
             <Card className={classes.card} key={idx}>
-              <CardHeader title={x.CourseName} subheader={x.Date} />
+              <CardHeader
+                title={x.CourseName}
+                subheader={JSON.stringify(x.Date).slice(1, -1)}
+              />
 
               <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
@@ -185,6 +184,9 @@ export default function Main(props) {
                 <CardContent>
                   <Typography paragraph>{x.Content}</Typography>
                 </CardContent>
+                <Button variant="contained" color="primary">
+                  Delete
+                </Button>
               </Collapse>
             </Card>
           ))}
@@ -192,17 +194,12 @@ export default function Main(props) {
       </div>
     );
   }
-  if (!state.add) {
+  if (!state.add && values.name) {
     return (
       <Forms
         callback={(event, ret) => {
           setState({ home: false });
           if (ret) setExpand([...expand, ret]);
-        }}
-        fields={{
-          Date: "text",
-          Overview: "text",
-          Content: "text"
         }}
         newProp={values.name}
       />

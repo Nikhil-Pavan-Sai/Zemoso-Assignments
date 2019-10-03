@@ -3,15 +3,24 @@ import { Button, TextField } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
 import "./App.css";
 
 class Forms extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { newDate: new Date() };
     this.postchanges = this.postchanges.bind(this);
     this.validate = this.validate.bind(this);
   }
+
+  setDate = newDate => this.setState({ newDate });
+
   myChangeHandler = event => {
     let nam = event.target.name;
     let val = event.target.value;
@@ -29,10 +38,18 @@ class Forms extends React.Component {
   }
 
   async postchanges(event) {
+    var options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    };
+
     if (this.validate())
       this.props.callback(event, {
         ...this.state,
-        CourseName: this.props.newProp
+        CourseName: this.props.newProp,
+        Date: this.state.newDate.toLocaleDateString("en-US", options)
       });
   }
 
@@ -58,15 +75,24 @@ class Forms extends React.Component {
                 }}
               />
               <br />
-              <TextField
-                id="standard-name"
-                multiline
-                label="Date"
-                name="Date"
-                onChange={this.myChangeHandler}
-                margin="normal"
-              />
               <br />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <Grid container justify="space-around">
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="MM/dd/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Date picker inline"
+                    value={this.state.newDate}
+                    onChange={this.setDate}
+                    KeyboardButtonProps={{
+                      "aria-label": "change date"
+                    }}
+                  />
+                </Grid>
+              </MuiPickersUtilsProvider>
               <TextField
                 id="standard-name"
                 multiline
