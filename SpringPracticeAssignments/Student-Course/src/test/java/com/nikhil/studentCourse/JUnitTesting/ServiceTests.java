@@ -25,9 +25,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:test.properties")
-public class CourseServiceTest {
+public class ServiceTests {
 
     private static Student[] students;
     private static Course[] courses;
@@ -140,10 +140,9 @@ public class CourseServiceTest {
         currentUser.setPassword(null);
 
         //Try to add the invalid objects
-        Exception e1 = assertThrows(ConstraintViolationException.class,()->studentService.addStudent(currentStudent));
-        Exception e2 = assertThrows(ConstraintViolationException.class,()->courseService.addCourse(currentCourse));
-        Exception e3 = assertThrows(ConstraintViolationException.class,()->userService.addUser(currentUser));
-        System.out.println(e1.getMessage() + e2.getMessage() + e3.getMessage());
+        assertThrows(ConstraintViolationException.class,()->studentService.addStudent(currentStudent));
+        assertThrows(ConstraintViolationException.class,()->courseService.addCourse(currentCourse));
+        assertThrows(ConstraintViolationException.class,()->userService.addUser(currentUser));
     }
 
     @Test

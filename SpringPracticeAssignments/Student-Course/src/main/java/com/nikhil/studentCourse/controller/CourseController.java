@@ -2,25 +2,22 @@ package com.nikhil.studentCourse.controller;
 
 import com.nikhil.studentCourse.exception.ResourceNotFoundException;
 import com.nikhil.studentCourse.model.Course;
-import com.nikhil.studentCourse.model.Student;
 import com.nikhil.studentCourse.services.serviceInterfaces.CourseService;
 import com.nikhil.studentCourse.services.serviceInterfaces.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 public class CourseController
 {
     @Autowired
-    private CourseService courseService;
+    private CourseService courseService = null;
 
     @Autowired
-    private StudentService studentService;
+    private StudentService studentService = null;
 
     @PostMapping("/courses")
     public Course createCourse(@Valid @RequestBody Course course)

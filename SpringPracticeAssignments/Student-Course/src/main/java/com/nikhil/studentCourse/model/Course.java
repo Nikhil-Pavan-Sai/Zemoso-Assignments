@@ -32,6 +32,10 @@ public class Course
     public Course() {
     }
 
+    public Course(String courseName){
+        this.courseName = courseName;
+    }
+
     public Long getId() {
         return id;
     }
