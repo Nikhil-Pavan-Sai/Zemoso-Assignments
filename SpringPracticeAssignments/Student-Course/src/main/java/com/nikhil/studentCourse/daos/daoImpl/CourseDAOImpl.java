@@ -14,7 +14,7 @@ import java.util.Optional;
 public class CourseDAOImpl implements CourseDAO {
 
     @Autowired
-    private EntityManager entityManager;
+    private EntityManager entityManager = null;
 
     @Override
     public List<Course> list() {
