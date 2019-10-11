@@ -17,10 +17,10 @@ import java.util.Set;
 public class StudentDAOImpl implements StudentDAO {
 
     @Autowired
-    private EntityManager entityManager;
+    private EntityManager entityManager = null;
 
     @Autowired
-    private CourseDAO courseDAO;
+    private CourseDAO courseDAO = null;
 
     @Override
     public List<Student> list() {
@@ -55,11 +55,12 @@ public class StudentDAOImpl implements StudentDAO {
     public boolean remove(Long stKey, Long coKey)
     {
         Optional<Student> currStudent = find(stKey);
-        if (currStudent.isPresent())
+        Optional<Course>  currCourse = courseDAO.find(coKey);
+        if (currStudent.isPresent() && currCourse.isPresent())
         {
             Student student = currStudent.get();
             Set<Course> stCourse = student.getCourses();
-            stCourse.remove(courseDAO.find(coKey).get());
+            stCourse.remove(currCourse.get());
             student.setCourses(stCourse);
             save(student);
             return true;

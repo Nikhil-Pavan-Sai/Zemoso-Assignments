@@ -46,7 +46,8 @@ public class APITests {
     private int randomServerPort = 0;
 
     @Test
-    public void postApiTest() throws URISyntaxException {
+    /*This Method is used to test whether the bulk of Students, Courses and Users are added to database or not*/
+    public void postApiTestForBulk() throws URISyntaxException {
         int studentSize = studentController.getStudent().size();
         int courseSize = courseController.getCourse().size();
         int userSize = userController.getUser().size();
@@ -88,7 +89,8 @@ public class APITests {
     }
 
     @Test
-    public void getApiTest() throws URISyntaxException{
+    /*This Method is used to test whether the bulk of Students, Courses and Users are retrieved from database or not*/
+    public void getApiTestForBulk() throws URISyntaxException{
         RestTemplate restTemplate = new RestTemplate();
         final String baseUrl = "http://localhost:"+randomServerPort+"/students";
         URI uri = new URI(baseUrl);

@@ -16,9 +16,6 @@ public class CourseController
     @Autowired
     private CourseService courseService = null;
 
-    @Autowired
-    private StudentService studentService = null;
-
     @PostMapping("/courses")
     public Course createCourse(@Valid @RequestBody Course course)
     {

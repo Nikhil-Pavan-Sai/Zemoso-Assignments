@@ -29,7 +29,7 @@ public class StudentController
     }
 
     @PostMapping("/students/{studentId}/courses")
-    public Student addCourseToStudent(@PathVariable (value = "studentId") Long studentId, @Valid @RequestBody Course course)
+    public Student addAllCoursesToStudent(@PathVariable (value = "studentId") Long studentId, @Valid @RequestBody Course course)
     {
         Student student= studentService.findStudent(studentId).orElseThrow(() -> new ResourceNotFoundException("Student not found !"));
         Set<Course> set = student.getCourses();

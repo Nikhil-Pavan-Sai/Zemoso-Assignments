@@ -14,10 +14,10 @@ import java.util.List;
 public class UserController
 {
     @Autowired
-    private UserService userService;
+    private UserService userService = null;
 
     @PostMapping("/user/validate")
-    public ResponseEntity<User> validate(@RequestBody Credentials credentials) throws Exception
+    public ResponseEntity<User> validate(@RequestBody Credentials credentials)
     {
         User u = userService.findByEmail(credentials.getEmail()).orElseThrow(ResourceNotFoundException::new);
         if(u.getPassword().equals(credentials.getPassword()))
