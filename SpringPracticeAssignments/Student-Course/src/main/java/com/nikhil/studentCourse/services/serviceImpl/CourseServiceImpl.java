@@ -53,4 +53,8 @@ public class CourseServiceImpl implements CourseService
         return courseDAO.list();
     }
 
+    public void setCourseDao(CourseDAO courseDao) {
+        this.courseDAO = courseDao;
+    }
+
 }

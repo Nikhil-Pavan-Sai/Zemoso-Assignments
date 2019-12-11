@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: User</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nikhil.studentCourse.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: User (com.nikhil.studentCourse.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">User</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (29/ 29)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">User$HibernateProxy$tQGutYDR</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$0yOReJZV</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$1LIm07do</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$390scn71</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$Arfjm3OH</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$FztpfCMY</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$gjHVv42X</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$jFtr0fH3</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$n3ajIXmQ</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$oNkmNVcy</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$SfCLLdve</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$SPbZArZs</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$tLnc28iz</td>
+  </tr>
+  <tr>
+    <td class="name">User$MockitoMock$1589837791$auxiliary$Z5D6I1rJ</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (29/ 29)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nikhil.studentCourse.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.hibernate.annotations.NaturalId;
+<i>4</i>&nbsp;import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import javax.persistence.*;
+<i>7</i>&nbsp;import javax.validation.constraints.NotNull;
+<i>8</i>&nbsp;import java.io.Serializable;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;@Table(name = &quot;User&quot;)
+<i>11</i>&nbsp;@Entity
+<i>12</i>&nbsp;@EntityListeners(AuditingEntityListener.class)
+<i>13</i>&nbsp;public class User implements Serializable,Cloneable,Model
+<i>14</i>&nbsp;{
+<i>15</i>&nbsp;    @Id
+<i>16</i>&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<i>17</i>&nbsp;    private long id;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    @NotNull
+<i>20</i>&nbsp;    @NaturalId
+<i>21</i>&nbsp;    private String firstName;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    @NotNull
+<i>24</i>&nbsp;    @NaturalId
+<i>25</i>&nbsp;    private String lastName;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    @NaturalId
+<i>28</i>&nbsp;    private String email;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @NotNull
+<i>31</i>&nbsp;    @NaturalId
+<i>32</i>&nbsp;    private String password;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    public User copy(){
+<b class="fc"><i>35</i>&nbsp;        User user = new User();</b>
+<b class="fc"><i>36</i>&nbsp;        user.setId(this.id);</b>
+<b class="fc"><i>37</i>&nbsp;        user.setFirstName(this.getFirstName());</b>
+<b class="fc"><i>38</i>&nbsp;        user.setLastName(this.getLastName());</b>
+<b class="fc"><i>39</i>&nbsp;        user.setEmail(this.getEmail());</b>
+<b class="fc"><i>40</i>&nbsp;        user.setPassword(this.getPassword());</b>
+<b class="fc"><i>41</i>&nbsp;        return user;</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<b class="fc"><i>44</i>&nbsp;    public User(){}</b>
+<i>45</i>&nbsp;
+<b class="fc"><i>46</i>&nbsp;    public User(String firstName, String lastName, String email, String password){</b>
+<b class="fc"><i>47</i>&nbsp;        this.firstName = firstName;</b>
+<b class="fc"><i>48</i>&nbsp;        this.lastName = lastName;</b>
+<b class="fc"><i>49</i>&nbsp;        this.email = email;</b>
+<b class="fc"><i>50</i>&nbsp;        this.password = password;</b>
+<b class="fc"><i>51</i>&nbsp;    }</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    public long getId() {
+<b class="fc"><i>54</i>&nbsp;        return id;</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    public void setId(long id) {
+<b class="fc"><i>58</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>59</i>&nbsp;    }</b>
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    public String getFirstName() {
+<b class="fc"><i>62</i>&nbsp;        return firstName;</b>
+<i>63</i>&nbsp;    }
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    public void setFirstName(String firstName) {
+<b class="fc"><i>66</i>&nbsp;        this.firstName = firstName;</b>
+<b class="fc"><i>67</i>&nbsp;    }</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    public String getLastName() {
+<b class="fc"><i>70</i>&nbsp;        return lastName;</b>
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    public void setLastName(String lastName) {
+<b class="fc"><i>74</i>&nbsp;        this.lastName = lastName;</b>
+<b class="fc"><i>75</i>&nbsp;    }</b>
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    public String getEmail() {
+<b class="fc"><i>78</i>&nbsp;        return email;</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    public void setEmail(String email) {
+<b class="fc"><i>82</i>&nbsp;        this.email = email;</b>
+<b class="fc"><i>83</i>&nbsp;    }</b>
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    public String getPassword() {
+<b class="fc"><i>86</i>&nbsp;        return password;</b>
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    public void setPassword(String password) {
+<b class="fc"><i>90</i>&nbsp;        this.password = password;</b>
+<b class="fc"><i>91</i>&nbsp;    }</b>
+<i>92</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-12-11 14:52</div>
+</div>
+</body>
+</html>

@@ -68,6 +68,7 @@ public class ServiceTests {
 
         Course course = new Course();
         course.setCourseName(getRandomString(getRandomInt(7)));
+        course.setCourseDescription(getRandomString(50));
 
         User user = new User();
         user.setFirstName(getRandomString(getRandomInt(5)));
@@ -129,6 +130,7 @@ public class ServiceTests {
         Course currentCourse = getCurrentCourse();
         //currentCourse.setId(null);
         currentCourse.setCourseName(null);
+        currentCourse.setCourseDescription(null);
 
         User currentUser = new User();
         //currentUser.setId(null);

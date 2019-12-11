@@ -1,0 +1,68 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GenericDAO</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nikhil.studentCourse.daos.daoInterfaces</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GenericDAO (com.nikhil.studentCourse.daos.daoInterfaces)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">GenericDAO</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nikhil.studentCourse.daos.daoInterfaces;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import java.io.Serializable;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;import java.util.Optional;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public interface GenericDAO&lt;T, K extends Serializable&gt;
+<i>9</i>&nbsp;{
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    List&lt;T&gt; list();
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    Optional&lt;T&gt; find(K key);
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    boolean remove(K key);
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    boolean remove(T entry);
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    T save(T entry);
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-12-11 14:52</div>
+</div>
+</body>
+</html>

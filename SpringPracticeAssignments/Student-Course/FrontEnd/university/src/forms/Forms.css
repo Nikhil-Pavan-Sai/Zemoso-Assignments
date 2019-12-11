@@ -1,0 +1,11 @@
+.title {
+  flex: 1;
+}
+
+.bg {
+  background-image: url("../res/cool-background.png");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

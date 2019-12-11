@@ -1,8 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import "/home/user/Documents/Assignments/SpringPracticeAssignments/Student-Course/FrontEnd/university/src/Security/Login.css";
-import { TextField } from "material-ui";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import RaisedButton from "material-ui/RaisedButton";
+import Button from "@material-ui/core/Button";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import AppBar from "@material-ui/core/AppBar";
+import TextField from "@material-ui/core/TextField";
+import "./Forms.css";
 
 class Forms extends React.Component {
   constructor(props) {
@@ -34,33 +37,50 @@ class Forms extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <form className="Login">
-          {Object.entries(this.props.fields).map(([key, value]) => (
-            <React.Fragment>
-              <TextField
-                type={value}
-                name={key}
-                hintText={`Enter your ${key}`}
-                floatingLabelText={key}
-                onChange={this.myChangeHandler}
-              />
-              <br />
-            </React.Fragment>
-          ))}
-          <br />
-          <RaisedButton
-            label="Add"
-            primary={true}
-            style={style}
-            onClick={() => this.postchanges()}
-          />
-        </form>
-      </MuiThemeProvider>
+      <div className="bg">
+        <AppBar position="static">
+          <Toolbar variant="dense">
+            <Typography variant="h6" color="inherit" className="title">
+              Add new element
+            </Typography>
+            <Button color="inherit" onClick={() => this.props.goHome()}>
+              Home
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <div>
+          <form className="Login">
+            {Object.entries(this.props.fields).map(([key, value]) => (
+              <React.Fragment key={key}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  type={value}
+                  name={key}
+                  label={`Enter your ${key}`}
+                  onChange={this.myChangeHandler}
+                  autoFocus
+                />
+                <br />
+              </React.Fragment>
+            ))}
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={e => {
+                e.preventDefault();
+                this.postchanges();
+              }}
+            >
+              Add
+            </Button>
+          </form>
+        </div>
+      </div>
     );
   }
 }
-const style = {
-  margin: 15
-};
 export default Forms;

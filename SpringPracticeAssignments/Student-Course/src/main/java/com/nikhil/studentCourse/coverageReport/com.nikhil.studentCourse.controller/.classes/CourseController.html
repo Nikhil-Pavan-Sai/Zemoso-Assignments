@@ -1,0 +1,134 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CourseController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nikhil.studentCourse.controller</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CourseController (com.nikhil.studentCourse.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CourseController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.9%
+  </span>
+  <span class="absValue">
+    (3/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (4/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nikhil.studentCourse.controller;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nikhil.studentCourse.exception.ResourceNotFoundException;
+<i>4</i>&nbsp;import com.nikhil.studentCourse.model.Course;
+<i>5</i>&nbsp;import com.nikhil.studentCourse.services.serviceInterfaces.CourseService;
+<i>6</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>7</i>&nbsp;import org.springframework.web.bind.annotation.*;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import javax.validation.Valid;
+<i>10</i>&nbsp;import java.util.List;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;@RestController
+<b class="fc"><i>13</i>&nbsp;public class CourseController</b>
+<i>14</i>&nbsp;{
+<b class="fc"><i>15</i>&nbsp;    @Autowired</b>
+<i>16</i>&nbsp;    private CourseService courseService = null;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    @PostMapping(&quot;/courses&quot;)
+<i>19</i>&nbsp;    public Course createCourse(@Valid @RequestBody Course course)
+<i>20</i>&nbsp;    {
+<b class="fc"><i>21</i>&nbsp;        return courseService.addCourse(course);</b>
+<i>22</i>&nbsp;    }
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    @GetMapping(&quot;/courses&quot;)
+<i>25</i>&nbsp;    public List&lt;Course&gt; getCourse()
+<i>26</i>&nbsp;    {
+<b class="fc"><i>27</i>&nbsp;        return courseService.findAll();</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @GetMapping(&quot;/courses/{courseId}&quot;)
+<i>31</i>&nbsp;    public Course getCourseById(@PathVariable Long courseId)
+<i>32</i>&nbsp;    {
+<b class="nc"><i>33</i>&nbsp;        return courseService.findCourse(courseId).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Student: &quot; + courseId + &quot; not found !&quot;));</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    @PutMapping(&quot;/courses/{courseId}&quot;)
+<i>37</i>&nbsp;    public Course updateCourse(@PathVariable Long courseId, @Valid @RequestBody Course course)
+<i>38</i>&nbsp;    {
+<b class="nc"><i>39</i>&nbsp;        return courseService.findCourse(courseId).map(course1 -&gt; {</b>
+<b class="nc"><i>40</i>&nbsp;            course1.setCourseName(course.getCourseName());</b>
+<b class="nc"><i>41</i>&nbsp;            course1.setCourseDescription(course.getCourseDescription());</b>
+<b class="nc"><i>42</i>&nbsp;            return courseService.addCourse(course1);</b>
+<b class="nc"><i>43</i>&nbsp;        }).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Student: &quot; + courseId + &quot; not found !&quot;));</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    @DeleteMapping(&quot;/courses/{courseId}&quot;)
+<i>47</i>&nbsp;    public void deleteCourse(@PathVariable Long courseId)
+<i>48</i>&nbsp;    {
+<b class="nc"><i>49</i>&nbsp;        courseService.removeCourse(courseId);</b>
+<b class="nc"><i>50</i>&nbsp;    }</b>
+<i>51</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-12-11 14:52</div>
+</div>
+</body>
+</html>

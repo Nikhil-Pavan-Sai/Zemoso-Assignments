@@ -51,4 +51,8 @@ public class CourseDAOImpl implements CourseDAO {
             else{ currentSession.save(entry); }
             return entry;
     }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 }

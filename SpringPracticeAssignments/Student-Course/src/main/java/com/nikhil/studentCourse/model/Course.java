@@ -2,23 +2,30 @@ package com.nikhil.studentCourse.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "Course")
-public class Course
+@EntityListeners(AuditingEntityListener.class)
+public class Course implements Serializable,Cloneable,Model
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @NotNull
     @NaturalId
     private String courseName;
+
+    @NotNull
+    @Column(length = 500)
+    private String courseDescription;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER,
@@ -29,18 +36,28 @@ public class Course
             mappedBy = "courses")
     private Set<Student> students = new HashSet<>();
 
+    public String getCourseDescription() {
+        return courseDescription;
+    }
+
+    public void setCourseDescription(String courseDescription) {
+        this.courseDescription = courseDescription;
+    }
+
     public Course() {
     }
 
-    public Course(String courseName){
+    public Course(String courseName, String courseDescription){
         this.courseName = courseName;
+        this.courseDescription = courseDescription;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    @Override
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -64,6 +81,7 @@ public class Course
         Course course = new Course();
         course.setId(this.id);
         course.setCourseName(this.getCourseName());
+        course.setCourseDescription(this.getCourseDescription());
         course.setStudents(this.getStudents());
         return course;
     }

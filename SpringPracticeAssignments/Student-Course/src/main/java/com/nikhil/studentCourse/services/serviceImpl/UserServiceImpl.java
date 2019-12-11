@@ -59,4 +59,8 @@ public class UserServiceImpl implements UserService
         return userDAO.findByEmail(email);
     }
 
+    public void setUserDao(UserDAO userDao) {
+        this.userDAO = userDao;
+    }
+
 }

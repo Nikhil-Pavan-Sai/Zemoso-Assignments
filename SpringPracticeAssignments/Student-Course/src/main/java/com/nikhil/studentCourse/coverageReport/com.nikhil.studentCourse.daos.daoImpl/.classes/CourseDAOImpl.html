@@ -1,0 +1,184 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CourseDAOImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nikhil.studentCourse.daos.daoImpl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CourseDAOImpl (com.nikhil.studentCourse.daos.daoImpl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CourseDAOImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/ 18)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CourseDAOImpl$$EnhancerBySpringCGLIB$$17243818</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$$EnhancerBySpringCGLIB$$17243818$$FastClassBySpringCGLIB$$63933da1</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$$FastClassBySpringCGLIB$$69a83a4c</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$MockitoMock$25293288</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$MockitoMock$25293288$auxiliary$ChOQMKC8</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$MockitoMock$25293288$auxiliary$Gs7Wl2pF</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$MockitoMock$25293288$auxiliary$Lu2W0kAJ</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$MockitoMock$25293288$auxiliary$ma5qoyzl</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$MockitoMock$25293288$auxiliary$RbiFYCvY</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$MockitoMock$25293288$auxiliary$sE7NnloW</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$MockitoMock$25293288$auxiliary$wZcJf8y8</td>
+  </tr>
+  <tr>
+    <td class="name">CourseDAOImpl$MockitoMock$25293288$auxiliary$YB2pss45</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/ 18)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nikhil.studentCourse.daos.daoImpl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nikhil.studentCourse.daos.daoInterfaces.CourseDAO;
+<i>4</i>&nbsp;import com.nikhil.studentCourse.model.Course;
+<i>5</i>&nbsp;import org.hibernate.Session;
+<i>6</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>7</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import javax.persistence.EntityManager;
+<i>10</i>&nbsp;import java.util.List;
+<i>11</i>&nbsp;import java.util.Optional;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;@Repository
+<b class="fc"><i>14</i>&nbsp;public class CourseDAOImpl implements CourseDAO {</b>
+<i>15</i>&nbsp;
+<b class="fc"><i>16</i>&nbsp;    @Autowired</b>
+<i>17</i>&nbsp;    private EntityManager entityManager = null;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    @Override
+<i>20</i>&nbsp;    public List&lt;Course&gt; list() {
+<b class="fc"><i>21</i>&nbsp;        Session currentSession = (Session) entityManager.getDelegate();</b>
+<b class="fc"><i>22</i>&nbsp;        return currentSession.createQuery(&quot;from Course&quot;,Course.class).getResultList();</b>
+<i>23</i>&nbsp;    }
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    @Override
+<i>26</i>&nbsp;    public Optional&lt;Course&gt; find(Long key) {
+<b class="fc"><i>27</i>&nbsp;        return Optional.ofNullable(entityManager.find(Course.class,key));</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @Override
+<i>31</i>&nbsp;    public boolean remove(Long key) {
+<b class="fc"><i>32</i>&nbsp;        Session currSession = (Session) entityManager.getDelegate();</b>
+<b class="fc"><i>33</i>&nbsp;        Optional&lt;Course&gt; currCourse = find(key);</b>
+<b class="fc"><i>34</i>&nbsp;        if (currCourse.isPresent())</b>
+<i>35</i>&nbsp;        {
+<b class="fc"><i>36</i>&nbsp;            currSession.createQuery(&quot;delete from Course where id=&quot; + key).executeUpdate();</b>
+<b class="fc"><i>37</i>&nbsp;            return true;</b>
+<i>38</i>&nbsp;        }
+<b class="fc"><i>39</i>&nbsp;        return false;</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    @Override
+<i>43</i>&nbsp;    public boolean remove(Course entry) {
+<b class="fc"><i>44</i>&nbsp;        return remove(entry.getId());</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    @Override
+<i>48</i>&nbsp;    public Course save(Course entry) {
+<b class="fc"><i>49</i>&nbsp;            Session currentSession = (Session)entityManager.getDelegate();</b>
+<b class="fc"><i>50</i>&nbsp;            if (currentSession.contains(entry)){ currentSession.merge(entry); }</b>
+<b class="fc"><i>51</i>&nbsp;            else{ currentSession.save(entry); }</b>
+<b class="fc"><i>52</i>&nbsp;            return entry;</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public void setEntityManager(EntityManager entityManager) {
+<b class="fc"><i>56</i>&nbsp;        this.entityManager = entityManager;</b>
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-12-11 14:52</div>
+</div>
+</body>
+</html>

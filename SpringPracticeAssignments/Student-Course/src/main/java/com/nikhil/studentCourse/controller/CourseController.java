@@ -3,7 +3,6 @@ package com.nikhil.studentCourse.controller;
 import com.nikhil.studentCourse.exception.ResourceNotFoundException;
 import com.nikhil.studentCourse.model.Course;
 import com.nikhil.studentCourse.services.serviceInterfaces.CourseService;
-import com.nikhil.studentCourse.services.serviceInterfaces.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +38,7 @@ public class CourseController
     {
         return courseService.findCourse(courseId).map(course1 -> {
             course1.setCourseName(course.getCourseName());
+            course1.setCourseDescription(course.getCourseDescription());
             return courseService.addCourse(course1);
         }).orElseThrow(() -> new ResourceNotFoundException("Student: " + courseId + " not found !"));
     }

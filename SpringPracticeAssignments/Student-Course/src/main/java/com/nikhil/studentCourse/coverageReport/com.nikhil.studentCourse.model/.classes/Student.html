@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Student</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nikhil.studentCourse.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Student (com.nikhil.studentCourse.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Student</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/ 30)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Student$HibernateProxy$PjaLrIKz</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$5m2vFD5J</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$eJpHVCYQ</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$gQla3euv</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$jBS1DeEu</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$SM7Wldwt</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$SPqlcer1</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$stE6Ttj5</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$tI7pIJKC</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$URrUNqzx</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$UwPx3tMd</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$vHjukKx0</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$VLoToPAA</td>
+  </tr>
+  <tr>
+    <td class="name">Student$MockitoMock$2060216923$auxiliary$WU7926hM</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/ 30)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nikhil.studentCourse.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+<i>4</i>&nbsp;import org.hibernate.annotations.NaturalId;
+<i>5</i>&nbsp;import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import javax.persistence.*;
+<i>8</i>&nbsp;import javax.validation.constraints.NotNull;
+<i>9</i>&nbsp;import java.io.Serializable;
+<i>10</i>&nbsp;import java.util.HashSet;
+<i>11</i>&nbsp;import java.util.Set;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;@Entity
+<i>14</i>&nbsp;@Table(name = &quot;Student&quot;)
+<i>15</i>&nbsp;@EntityListeners(AuditingEntityListener.class)
+<i>16</i>&nbsp;public class Student implements Serializable,Cloneable,Model
+<i>17</i>&nbsp;{
+<i>18</i>&nbsp;    @Id
+<i>19</i>&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<i>20</i>&nbsp;    private long id;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    @NotNull
+<i>23</i>&nbsp;    @NaturalId
+<i>24</i>&nbsp;    private String name;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    @NotNull
+<i>27</i>&nbsp;    @NaturalId
+<i>28</i>&nbsp;    private String standard;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @NotNull
+<i>31</i>&nbsp;    @NaturalId
+<i>32</i>&nbsp;    private String branch;
+<i>33</i>&nbsp;
+<b class="fc"><i>34</i>&nbsp;    @JsonIgnore</b>
+<i>35</i>&nbsp;    @ManyToMany(fetch = FetchType.EAGER,
+<i>36</i>&nbsp;            cascade = {
+<i>37</i>&nbsp;                    CascadeType.PERSIST,
+<i>38</i>&nbsp;                    CascadeType.MERGE
+<i>39</i>&nbsp;            })
+<i>40</i>&nbsp;    @JoinTable(name = &quot;Student_Course&quot;,
+<i>41</i>&nbsp;            joinColumns = { @JoinColumn(name = &quot;student_id&quot;) },
+<i>42</i>&nbsp;            inverseJoinColumns = { @JoinColumn(name = &quot;course_id&quot;) })
+<i>43</i>&nbsp;    private Set&lt;Course&gt; courses = new HashSet&lt;&gt;();
+<i>44</i>&nbsp;
+<b class="fc"><i>45</i>&nbsp;    public Student() {</b>
+<b class="fc"><i>46</i>&nbsp;    }</b>
+<i>47</i>&nbsp;
+<b class="fc"><i>48</i>&nbsp;    public Student(String name, String standard, String branch) {</b>
+<b class="fc"><i>49</i>&nbsp;        this.name = name;</b>
+<b class="fc"><i>50</i>&nbsp;        this.standard = standard;</b>
+<b class="fc"><i>51</i>&nbsp;        this.branch = branch;</b>
+<b class="fc"><i>52</i>&nbsp;    }</b>
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    public Student copy(){
+<b class="fc"><i>55</i>&nbsp;        Student student = new Student();</b>
+<b class="fc"><i>56</i>&nbsp;        student.setId(this.id);</b>
+<b class="fc"><i>57</i>&nbsp;        student.setName(this.name);</b>
+<b class="fc"><i>58</i>&nbsp;        student.setBranch(this.getBranch());</b>
+<b class="fc"><i>59</i>&nbsp;        student.setStandard(this.getStandard());</b>
+<b class="fc"><i>60</i>&nbsp;        student.setCourses(this.getCourses());</b>
+<b class="fc"><i>61</i>&nbsp;        return student;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    public long getId() {
+<b class="fc"><i>65</i>&nbsp;        return id;</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public void setId(long id) {
+<b class="fc"><i>69</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>70</i>&nbsp;    }</b>
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public String getName() {
+<b class="fc"><i>73</i>&nbsp;        return name;</b>
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    public void setName(String name) {
+<b class="fc"><i>77</i>&nbsp;        this.name = name;</b>
+<b class="fc"><i>78</i>&nbsp;    }</b>
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    public String getStandard() {
+<b class="fc"><i>81</i>&nbsp;        return standard;</b>
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    public void setStandard(String standard) {
+<b class="fc"><i>85</i>&nbsp;        this.standard = standard;</b>
+<b class="fc"><i>86</i>&nbsp;    }</b>
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    public String getBranch() {
+<b class="fc"><i>89</i>&nbsp;        return branch;</b>
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    public void setBranch(String branch) {
+<b class="fc"><i>93</i>&nbsp;        this.branch = branch;</b>
+<b class="fc"><i>94</i>&nbsp;    }</b>
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    public Set&lt;Course&gt; getCourses() {
+<b class="fc"><i>97</i>&nbsp;        return courses;</b>
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    public void setCourses(Set&lt;Course&gt; courses) {
+<b class="fc"><i>101</i>&nbsp;        this.courses = courses;</b>
+<b class="fc"><i>102</i>&nbsp;    }</b>
+<i>103</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-12-11 14:52</div>
+</div>
+</body>
+</html>

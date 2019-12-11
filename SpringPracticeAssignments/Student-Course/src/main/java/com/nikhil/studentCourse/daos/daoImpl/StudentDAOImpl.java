@@ -69,12 +69,31 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
+    public Set<Course> listCourses(long id) throws Exception {
+        Session session = (Session) entityManager.getDelegate();
+        Optional<Student> student = Optional.ofNullable(session.find(Student.class,id));
+        if(student.isPresent())
+        {
+            //Initializing to a variable to avoid lazy initialization exception and call size to force computation
+            Set<Course> courses = student.get().getCourses();
+            courses.size();
+            return courses;
+        }
+        else
+            throw new Exception("No Such Intern");
+    }
+
+    @Override
     public Student save(Student entry) {
 
         Session currentSession = (Session)entityManager.getDelegate();
         if (currentSession.contains(entry)){ currentSession.merge(entry); }
         else { currentSession.save(entry); }
         return entry;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
 }

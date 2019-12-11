@@ -65,7 +65,7 @@ public class APITests {
 
         final String baseUrl1 = "http://localhost:"+randomServerPort+"/courses";
         URI uri1 = new URI(baseUrl1);
-        Course course = new Course("Some Random Course");
+        Course course = new Course("Some Random Course","Some random course description");
         HttpHeaders headers1 = new HttpHeaders();
         headers1.set("X-COM-PERSIST", "true");
         HttpEntity<Course> request1 = new HttpEntity<>(course, headers1);

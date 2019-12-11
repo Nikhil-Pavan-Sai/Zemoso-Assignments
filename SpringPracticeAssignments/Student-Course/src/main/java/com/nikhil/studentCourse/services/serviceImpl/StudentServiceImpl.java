@@ -1,21 +1,28 @@
 package com.nikhil.studentCourse.services.serviceImpl;
 
 import com.nikhil.studentCourse.daos.daoInterfaces.StudentDAO;
+import com.nikhil.studentCourse.model.Course;
 import com.nikhil.studentCourse.model.Student;
 import com.nikhil.studentCourse.services.serviceInterfaces.StudentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class StudentServiceImpl implements StudentService
 {
 
     @Autowired
-    private StudentDAO studentDao;
+    private StudentDAO studentDao = null;
+
+    private Logger logger = LoggerFactory.getLogger(StudentServiceImpl.class);
 
     @Override
     @Transactional
@@ -57,6 +64,24 @@ public class StudentServiceImpl implements StudentService
     @Transactional
     public List<Student> findAll() {
         return studentDao.list();
+    }
+
+    @Transactional
+    @Override
+    public Set<Course> getCourses(long id) {
+        try {
+
+            return studentDao.listCourses(id);
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            return new HashSet<>();
+        }
+    }
+
+    public void setStudentDao(StudentDAO studentDao) {
+        this.studentDao = studentDao;
     }
 
 }

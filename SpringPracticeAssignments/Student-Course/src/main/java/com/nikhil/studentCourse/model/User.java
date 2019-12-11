@@ -1,17 +1,20 @@
 package com.nikhil.studentCourse.model;
 
 import org.hibernate.annotations.NaturalId;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Table(name = "User")
 @Entity
-public class User
+@EntityListeners(AuditingEntityListener.class)
+public class User implements Serializable,Cloneable,Model
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @NotNull
     @NaturalId
@@ -47,11 +50,11 @@ public class User
         this.password = password;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
